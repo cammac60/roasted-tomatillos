@@ -13,6 +13,7 @@ function App() {
           <MoviesContainer />
         </>
       }/>
+      <Route path="/login" render={() => <div color="white">Temporary text</div>}/>
     </div>
   );
 }
