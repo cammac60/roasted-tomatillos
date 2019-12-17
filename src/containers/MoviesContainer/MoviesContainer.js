@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './MoviesContainer.scss'
 import { getMovies } from '../../apiCalls/apiCalls'
+import { addMovies } from '../../actions';
+import { connect } from 'react-redux';
 import SmallMovieCard from '../../components/SmallMovieCard/SmallMovieCard'
 
 class MoviesContainer extends Component {
@@ -24,6 +26,10 @@ class MoviesContainer extends Component {
       .catch(error => this.setState({error: error}))
   }
 
+  addMoviesToStore = (movies) => {
+    this.props.addMovies(movies)
+  }
+
   render() {
     return (
       <main className="container">
@@ -32,3 +38,13 @@ class MoviesContainer extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  movies: state.movies
+})
+
+const mapDispatchToProps = dispatch => ({
+  addMovies: movies => dispatch(addMovies(movies))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesContainer);
