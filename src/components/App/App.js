@@ -1,10 +1,11 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
+import MoviesContainer from '../../containers/MoviesContainer/MoviesContainer'
 
 function App() {
   return (
     <div className="App">
-      
+      <MoviesContainer />
     </div>
   );
 }
