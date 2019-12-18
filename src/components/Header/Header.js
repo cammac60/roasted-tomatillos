@@ -6,7 +6,11 @@ import { Link } from 'react-router-dom';
 const Header = ({ login }) => {
   let toggleLogin;
   login ?
-  toggleLogin = <button id="logout" className="toggleLogin">Logout</button> : toggleLogin = <Link to="/login" id="login" className="toggleLogin">Login</Link>;
+  toggleLogin = <button id="logout" className="toggleLogin">Logout</button> : toggleLogin = <Link id="login-link" to="/login">
+    <button id="login" className="toggleLogin">
+      Login
+    </button>
+  </Link>;
   return (
     <header className="header">
       <h1>Rancid Tomatillos</h1>
