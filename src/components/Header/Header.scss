@@ -1,0 +1,43 @@
+@import '../../variables.scss';
+
+.header {
+  align-items: center;
+  background-color: $main-background-color;
+  border-bottom: 1px solid $main-accent-color;
+  display: flex;
+  height: 10vh;
+  justify-content: space-between;
+}
+
+h1 {
+  color: $main-accent-color;
+  font: {
+    family: $large-text-font;
+    size: 3rem;
+  }
+  margin-left: 1.5%;
+}
+
+.toggleLogin {
+  background-color: $main-accent-color;
+  border: none;
+  border-radius: 45px;
+  color: $main-text-color;
+  font: {
+    family: $small-text-font;
+    size: 1rem;
+  }
+  height: 40px;
+  outline: none;
+  text-decoration: none;
+  width: 100%;
+  &:active {
+    background-color: black;
+    color: $main-text-color;
+  }
+}
+
+#login-link {
+  margin-right: 1.5%;
+  width: 10%;
+}

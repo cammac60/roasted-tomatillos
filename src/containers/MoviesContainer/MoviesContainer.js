@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import './MoviesContainer.scss'
-import { getMovies } from '../../apiCalls/apiCalls'
+import React, { Component } from 'react';
+import './MoviesContainer.scss';
+import { getMovies } from '../../apiCalls/apiCalls';
 import { addMovies } from '../../actions';
 import { connect } from 'react-redux';
-import SmallMovieCard from '../../components/SmallMovieCard/SmallMovieCard'
+import SmallMovieCard from '../../components/SmallMovieCard/SmallMovieCard';
 
 class MoviesContainer extends Component {
   constructor(props) {
