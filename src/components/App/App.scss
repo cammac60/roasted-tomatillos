@@ -1,6 +1,9 @@
 .App {
-  background-color: black;
-  height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+  background-image: url('../../images/Delphi-Lux-cinema-1-1024x682.jpg');
+  background-size: 100%;
+  background-blend-mode: darken;
   margin: 0;
-  width: 100vw;
+  width: 100vw; height: 100vh;
+  overflow: hidden;
 }
