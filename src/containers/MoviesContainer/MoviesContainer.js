@@ -4,6 +4,7 @@ import { getMovies } from '../../apiCalls/apiCalls';
 import { addMovies } from '../../actions';
 import { connect } from 'react-redux';
 import SmallMovieCard from '../../components/SmallMovieCard/SmallMovieCard';
+import LoadingImage from '../../components/LoadingImage/LoadingImage';
 
 class MoviesContainer extends Component {
   constructor(props) {
@@ -30,9 +31,23 @@ class MoviesContainer extends Component {
     this.props.addMovies(movies)
   }
 
+  createCards = () => {
+    return this.props.movies.map(movie => (
+      <SmallMovieCard
+        key={movie.id}
+        id={movie.id}
+        img={movie.poster_path}
+        rate={movie.average_rating}
+        title={movie.title} />
+    ))
+  }
+
   render() {
     return (
-      <main className="container">
+      <main className="movies-container">
+        {(this.state.isLoaded)
+            ? this.createCards()
+            : <LoadingImage />}
       </main>
     )
   }
@@ -45,6 +60,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addMovies: movies => dispatch(addMovies(movies))
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviesContainer);

@@ -2,7 +2,7 @@
 
 .header {
   align-items: center;
-  background-color: $main-background-color;
+  background-color: $main-background-color-transparent;
   border-bottom: 1px solid $main-accent-color;
   display: flex;
   height: 10vh;
@@ -10,7 +10,8 @@
 }
 
 h1 {
-  color: $main-accent-color;
+  color: $titles-color;
+  text-shadow: $text-shadow;
   font: {
     family: $large-text-font;
     size: 3rem;
@@ -23,9 +24,11 @@ h1 {
   border: none;
   border-radius: 45px;
   color: $main-text-color;
+  cursor: pointer;
   font: {
     family: $small-text-font;
     size: 1rem;
+    weight: 700;
   }
   height: 40px;
   outline: none;
