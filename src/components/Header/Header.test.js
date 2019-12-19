@@ -16,5 +16,10 @@ describe('Header', () => {
   it('Should match the snapshot', () =>{
     expect(wrapper).toMatchSnapshot();
   });
-  
+
+  it('Should redirect when the button is clicked', () => {
+    wrapper.find('.toggleLogin').simulate('click');
+    expect(wrapper.instance().Redirect).toHaveBeenCalled();
+  });
+
 });
