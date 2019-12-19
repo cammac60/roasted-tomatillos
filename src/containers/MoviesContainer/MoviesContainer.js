@@ -43,11 +43,16 @@ class MoviesContainer extends Component {
   }
 
   render() {
+    const { movies, isLoaded, error } = this.props;
+    const notification = (error !== '')
+      ? <h2>{error}</h2>
+      : <LoadingImage />
+
     return (
       <main className="movies-container">
-        {(this.state.isLoaded)
-            ? this.createCards()
-            : <LoadingImage />}
+        { (isLoaded && error === '')
+            ? this.createCards(movies)
+            : notification }
       </main>
     )
   }
