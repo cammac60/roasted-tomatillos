@@ -5,7 +5,7 @@
   border: 2px solid $main-accent-color;
   color: $main-text-color;
   font-family: $small-text-font;
-  height: 40%;
+  height: 45%;
   margin: {
     left: auto;
     right: auto;
@@ -34,5 +34,39 @@ h3 {
 }
 
 input {
+  height: 30px;
   margin-bottom: 20px;
+}
+
+label {
+  font-size: 0.8rem;
+}
+
+.sign-in {
+  background-color: $main-accent-color;
+  color: inherit;
+  font: {
+    size: 1rem;
+    weight: bold;
+  }
+  height: 30px;
+  margin: {
+    bottom: 10px;
+    left: auto;
+    right: auto;
+  }
+  outline: none;
+  width: 50%;
+  &:active {
+    background-color: black;
+  }
+}
+
+#back-home {
+  color: $main-text-color;
+  font-size: 0.8rem;
+  margin: {
+    left: auto;
+    right: auto;
+  }
 }
