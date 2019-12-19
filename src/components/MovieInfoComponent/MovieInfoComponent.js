@@ -11,10 +11,11 @@ const MovieInfoComponent = (props) => {
     height: '300px'
   }
   return (
-    <div >
-      <div><h1>{film.title}</h1></div>
+    <div>
+      <div className='title-div'><h1>{film.title}</h1></div>
       <article style={cardStyles}></article>
-      <section className='overview-box'>{film.release_date}{film.overview}</section>
+      <article className='release-date'>{film.release_date}</article>
+      <section className='overview-box'>{film.overview}</section>
     </div>
   )
 }

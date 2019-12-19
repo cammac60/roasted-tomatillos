@@ -15,7 +15,12 @@ function App() {
         </>
       }/>
       <Route path="/login" render={() => <div color="white">Temporary text</div>}/>
-      <Route path="/movies/:id" render={( { match } ) => <MovieInfoComponent id={match.params.id}></MovieInfoComponent>}/>
+      <Route path="/movies/:id" render={( { match } ) => 
+      <>
+        <Header />
+        <MovieInfoComponent id={match.params.id} />
+      </>
+    }/>
     </div>
   );
 }
