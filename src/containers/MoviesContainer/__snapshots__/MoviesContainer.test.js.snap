@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MoviesContainer should match snapshot if data is loading 1`] = `
+exports[`MoviesContainer MoviesContainer component should match snapshot if data is loading 1`] = `
 <main
   className="movies-container"
 >
@@ -8,7 +8,7 @@ exports[`MoviesContainer should match snapshot if data is loading 1`] = `
 </main>
 `;
 
-exports[`MoviesContainer should match snapshot if data was loaded and no error 1`] = `
+exports[`MoviesContainer MoviesContainer component should match snapshot if data was loaded and no error 1`] = `
 <main
   className="movies-container"
 >
@@ -22,7 +22,7 @@ exports[`MoviesContainer should match snapshot if data was loaded and no error 1
 </main>
 `;
 
-exports[`MoviesContainer should match snapshot if there is error after fetch 1`] = `
+exports[`MoviesContainer MoviesContainer component should match snapshot if there is error after fetch 1`] = `
 <main
   className="movies-container"
 >
