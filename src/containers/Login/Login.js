@@ -17,6 +17,7 @@ class Login extends Component {
       <form className="login-form">
         <h3>Please sign in to continue</h3>
         <div className="input-wrapper">
+          <div className="error">{this.state.errorMsg}</div>
           <label>Email:</label>
           <input id="email" value={this.state.username} type="text" onChange={(event) => this.handleChange(event)}/>
           <label>Password:</label>
