@@ -22,6 +22,5 @@ export const postSignIn = async (user) => {
     throw new Error('There was a problem signing in')
   }
   const newUser = await response.json();
-  // console.log(newUser);
   return newUser;
 }

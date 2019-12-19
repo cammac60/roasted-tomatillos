@@ -23,7 +23,7 @@ export class Login extends Component {
         <div className="input-wrapper">
           <div className="error">{this.state.errorMsg}</div>
           <label>Email:</label>
-          <input id="email" value={this.state.username} type="text" onChange={(event) => this.handleChange(event)}/>
+          <input autoComplete="off" id="email" value={this.state.username} type="text" onChange={(event) => this.handleChange(event)}/>
           <label>Password:</label>
           <input id="password" value={this.state.password} type="password" onChange={(event) => this.handleChange(event)}/>
           <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign in</button>
@@ -67,18 +67,23 @@ export class Login extends Component {
         email: this.state.email,
         password: this.state.password
       };
-      const result = await postSignIn(user)
-      console.log(result);
-      addUser(result)
+      try {
+        const result = await postSignIn(user)
+        console.log(addUser(result.user).user)
+        addUser(result.user)
+      }
+      catch (error) {
+        console.error(error.message)
+      }
     }
   }
 
 }
 
 export const mapDispatchToProps = dispatch => (
-  bindActionCreators({
+  {
     addUser
-  }, dispatch)
+  }
 )
 
 export default connect(null, mapDispatchToProps)(Login);

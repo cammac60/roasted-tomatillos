@@ -2,13 +2,13 @@ import { combineReducers } from 'redux';
 import { movies } from './movies';
 import { isLoaded } from './isLoaded';
 import { error } from './error';
-import { login } from './login';
+import { user } from './user';
 
 const rootReducer = combineReducers({
   movies,
   isLoaded,
   error,
-  login
+  user
 })
 
 export default rootReducer
