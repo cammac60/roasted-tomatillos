@@ -1,64 +1,70 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './MoviesContainer.scss';
 import { getMovies } from '../../apiCalls/apiCalls';
-import { addMovies } from '../../actions';
-import { connect } from 'react-redux';
+import { addMovies, addLoaded, hasError } from '../../actions';
 import SmallMovieCard from '../../components/SmallMovieCard/SmallMovieCard';
 import LoadingImage from '../../components/LoadingImage/LoadingImage';
 
-class MoviesContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLoaded: false
+export class MoviesContainer extends Component {
+  componentDidMount() {
+    if (!this.props.movies.length)
+      this.fetchMoviesData()
+  }
+
+  fetchMoviesData = async () => {
+    const { addMovies, addLoaded, hasError} = this.props
+    try {
+      const result = await getMovies()
+      addMovies(result.movies)
+      addLoaded(true)
+    }
+    catch (error) {
+      addLoaded(false)
+      hasError(error.message)
     }
   }
 
-  componentDidMount() {
-    (this.props.movies)
-      ? this.fetchMoviesData()
-      : this.setState({isLoaded: true})
-  }
-
-  fetchMoviesData = () => {
-    return getMovies()
-      .then(result => this.addMoviesToStore(result.movies))
-      .then(() => this.setState({isLoaded: true}))
-      .catch(error => this.setState({error: error}))
-  }
-
-  addMoviesToStore = (movies) => {
-    this.props.addMovies(movies)
-  }
-
-  createCards = () => {
-    return this.props.movies.map(movie => (
+  createCards = dataset => {
+    return dataset.map(movie => (
       <SmallMovieCard
         key={movie.id}
         id={movie.id}
         img={movie.poster_path}
         rate={movie.average_rating}
         title={movie.title} />
-    ))
+    ));
   }
 
   render() {
+    const { movies, isLoaded, error } = this.props;
+    const notification = (error !== '')
+      ? <h2>{error}</h2>
+      : <LoadingImage />
+
     return (
       <main className="movies-container">
-        {(this.state.isLoaded)
-            ? this.createCards()
-            : <LoadingImage />}
+        { (isLoaded && error === '')
+            ? this.createCards(movies)
+            : notification }
       </main>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  movies: state.movies
+export const mapStateToProps = ({movies, isLoaded, error}) => ({
+  movies,
+  isLoaded,
+  error
 })
 
-const mapDispatchToProps = dispatch => ({
-  addMovies: movies => dispatch(addMovies(movies))
-})
+export const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    addMovies,
+    addLoaded,
+    hasError
+  }, dispatch)
+)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviesContainer);

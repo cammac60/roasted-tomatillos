@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviesContainer should match snapshot if data is loading 1`] = `
+<main
+  className="movies-container"
+>
+  <LoadingImage />
+</main>
+`;
+
+exports[`MoviesContainer should match snapshot if data was loaded and no error 1`] = `
+<main
+  className="movies-container"
+>
+  <SmallMovieCard
+    id={1}
+    img="https://some.url/poster-image"
+    key="1"
+    rate={4}
+    title="Jumanji: The Next Level"
+  />
+</main>
+`;
+
+exports[`MoviesContainer should match snapshot if there is error after fetch 1`] = `
+<main
+  className="movies-container"
+>
+  <h2>
+    Failed to fetch
+  </h2>
+</main>
+`;
