@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { postSignIn } from '../../apiCalls/apiCalls';
+import { addUser } from '../../actions';
 import './Login.scss';
 
-class Login extends Component {
+export class Login extends Component {
   constructor(state) {
     super(state);
     this.state = {
@@ -57,17 +60,25 @@ class Login extends Component {
     }
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     if (this.validateForm()) {
       let user = {
         email: this.state.email,
         password: this.state.password
       };
-      postSignIn(user);
+      const result = await postSignIn(user)
+      console.log(result);
+      addUser(result)
     }
   }
 
 }
 
-export default Login;
+export const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    addUser
+  }, dispatch)
+)
+
+export default connect(null, mapDispatchToProps)(Login);
