@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 import MoviesContainer from '../../containers/MoviesContainer/MoviesContainer';
 import Header from '../Header/Header.js';
+import Login from '../../containers/Login/Login';
 import { Route } from 'react-router-dom';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
           <MoviesContainer />
         </>
       }/>
-      <Route path="/login" render={() => <div color="white">Temporary text</div>}/>
+      <Route path="/login" render={() => <Login />}/>
     </div>
   );
 }
