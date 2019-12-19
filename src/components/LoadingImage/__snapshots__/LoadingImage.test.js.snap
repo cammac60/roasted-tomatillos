@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot with all data passed in correctly 1`] = `
+<div
+  className="loading"
+>
+  <img
+    alt="camera"
+    src="camera.svg"
+  />
+  <div
+    className="light"
+  />
+  <img
+    alt="film"
+    className="movie-circle"
+    src="film-reel.svg"
+  />
+</div>
+`;

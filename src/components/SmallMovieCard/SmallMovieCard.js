@@ -16,7 +16,7 @@ class SmallMovieCard extends Component {
 
   render() {
     const { id, img, title, rate } = this.props
-    
+
     const headerStyles = {
       backgroundImage: `url("${img}")`,
       backgroundSize: '100%',
@@ -40,7 +40,5 @@ class SmallMovieCard extends Component {
     );
   }
 }
-
-
 
 export default SmallMovieCard;
