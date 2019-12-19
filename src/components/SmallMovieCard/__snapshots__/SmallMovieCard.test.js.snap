@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SmallMovieCard should match snapshot with all data passed in correctly 1`] = `
+<section
+  className="small-movie-card"
+  onClick={[Function]}
+>
+  <header
+    style={
+      Object {
+        "backgroundImage": "url(\\"https://some.url/img.jpg\\")",
+        "backgroundPosition": "center",
+        "backgroundSize": "100%",
+        "height": "300px",
+        "width": "230px",
+      }
+    }
+  />
+  <p
+    className="rate-number"
+  >
+    4
+  </p>
+  <div
+    className="title-block"
+  >
+    <p>
+      Jumanji: The Next Level
+    </p>
+  </div>
+</section>
+`;
+
+exports[`SmallMovieCard should match snapshot with redirect router if redirect state is true 1`] = `
+<Redirect
+  to="/movies/1"
+/>
+`;
