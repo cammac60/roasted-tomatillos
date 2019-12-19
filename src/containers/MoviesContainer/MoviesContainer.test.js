@@ -6,6 +6,10 @@ import {
   mapDispatchToProps } from './MoviesContainer';
 import { shallow } from 'enzyme';
 import { getMovies } from '../../apiCalls/apiCalls';
+import {
+  addMovies,
+  addLoaded,
+  hasError } from '../../actions';
 
 jest.mock('../../apiCalls/apiCalls');
 
@@ -150,4 +154,43 @@ describe("MoviesContainer", () => {
     });
   });
 
+  describe('mapStateToProps', () => {
+    it('should return an object with the movies array, isLoaded and error', () => {
+      // Setup
+      const mockState = {
+        movies: mockMoviesData,
+        isLoaded: true,
+        error: '',
+        user: {name: 'Ray'}
+      };
+
+      const expected = {
+        movies: mockMoviesData,
+        isLoaded: true,
+        error: ''
+      };
+
+      // Execution
+      const mappedProps = mapStateToProps(mockState);
+
+      // Expectation
+      expect(mappedProps).toEqual(expected);
+    });
+  });
+
+  describe('mapDispatchToProps', () => {
+    // NOTE: need to be fixed and checking with argument
+    it('calls dispatch with an addMovies action when addMovies is called', () => {
+      // Setup
+      const mockDispatch = jest.fn();
+      const actionToDispatch = addMovies({title: 'Frozen II'});
+
+      // Execution
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.addMovies({title: 'Frozen II'});
+
+      // Expectaion
+      expect(mockDispatch).toHaveBeenCalled();
+    });
+  });
 });
