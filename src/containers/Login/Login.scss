@@ -1,6 +1,7 @@
 @import '../../variables.scss';
 
 .login-form {
+  backdrop-filter: blur(4px);
   background-color: $main-background-color-transparent;
   border: 2px solid $main-accent-color;
   color: $main-text-color;
