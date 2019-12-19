@@ -2,10 +2,10 @@
 
 h2 {
   margin-top: 100px;
-  margin-left: 360px;
+  margin-left: 350px;
   display: inline-block;
   padding: 5px;
-  border: $main-accent-color solid 5px;
+  border: $main-accent-color solid 3px;
   background: $main-background-color-transparent;
   color: $titles-color;
 }
@@ -18,7 +18,7 @@ h2 {
 }
 
 .overview-box {
-  border: $main-accent-color solid 5px;
+  border: $main-accent-color solid 3px;
   background: $main-background-color-transparent;
   backdrop-filter: blur(4px);
   width: 60%;
