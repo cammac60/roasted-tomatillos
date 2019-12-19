@@ -1,30 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import './MoviesContainer.scss';
-import { getMovies } from '../../apiCalls/apiCalls';
-import { addMovies, addLoaded, hasError } from '../../actions';
 import SmallMovieCard from '../../components/SmallMovieCard/SmallMovieCard';
 import LoadingImage from '../../components/LoadingImage/LoadingImage';
 
 export class MoviesContainer extends Component {
-  componentDidMount() {
-    if (!this.props.movies.length)
-      this.fetchMoviesData()
-  }
 
-  fetchMoviesData = async () => {
-    const { addMovies, addLoaded, hasError} = this.props
-    try {
-      const result = await getMovies()
-      addMovies(result.movies)
-      addLoaded(true)
-    }
-    catch (error) {
-      addLoaded(false)
-      hasError(error.message)
-    }
-  }
 
   createCards = dataset => {
     return dataset.map(movie => (
@@ -59,12 +40,4 @@ export const mapStateToProps = ({movies, isLoaded, error}) => ({
   error
 })
 
-export const mapDispatchToProps = dispatch => (
-  bindActionCreators({
-    addMovies,
-    addLoaded,
-    hasError
-  }, dispatch)
-)
-
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesContainer);
+export default connect(mapStateToProps)(MoviesContainer);
