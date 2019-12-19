@@ -1,5 +1,33 @@
-.title-div {
+@import "../../variables.scss";
+
+h2 {
+  margin-top: 100px;
+  margin-left: 360px;
+  display: inline-block;
+  padding: 5px;
   border: $main-accent-color solid 5px;
   background: $main-background-color-transparent;
+  color: $titles-color;
+}
 
+.img-container {
+  position: absolute;
+  left: 100px;
+  top: 160px;
+  z-index: 1;
+}
+
+.overview-box {
+  border: $main-accent-color solid 5px;
+  background: $main-background-color-transparent;
+  backdrop-filter: blur(4px);
+  width: 60%;
+  height: 400px;
+  margin-left: 200px;
+  padding-left: 140px;
+  padding-right: 15px;
+
+  h3, p {
+    color: $main-text-color;
+  }
 }

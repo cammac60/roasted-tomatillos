@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import './MovieInfoComponent.scss'
 
 const MovieInfoComponent = (props) => {
   const film = props.movie
@@ -12,10 +13,15 @@ const MovieInfoComponent = (props) => {
   }
   return (
     <div>
-      <div className='title-div'><h1>{film.title}</h1></div>
-      <article style={cardStyles}></article>
-      <article className='release-date'>{film.release_date}</article>
-      <section className='overview-box'>{film.overview}</section>
+      <div className='title-div'><h2>{film.title}</h2></div>
+      <article className='img-container' style={cardStyles}>
+      <article className='release-date'></article>
+      </article>
+
+      <section className='overview-box'>
+        <h3>Released: {film.release_date}</h3>
+        <p>{film.overview}</p>
+      </section>
     </div>
   )
 }
