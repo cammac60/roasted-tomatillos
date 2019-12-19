@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { postSignIn } from '../../apiCalls/apiCalls';
 import './Login.scss';
 
 class Login extends Component {
@@ -31,7 +32,9 @@ class Login extends Component {
 
   handleChange = (event) => {
     let { target } = event;
-    this.validateForm();
+    if (this.state.email && this.state.password) {
+      this.setState({errorMsg: ''});
+    }
     switch(target.id) {
       case 'email':
         this.setState({email: target.value})
@@ -57,11 +60,14 @@ class Login extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.validateForm()) {
-
-    } else {
-
+      let user = {
+        email: this.state.email,
+        password: this.state.password
+      };
+      postSignIn(user);
     }
   }
+
 }
 
 export default Login;
