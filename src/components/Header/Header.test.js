@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
-import Header from './Header';
+import { Header, mapStateToProps } from './Header';
 
 describe('Header', () => {
   let wrapper, state;
 
   beforeEach(() => {
-    wrapper = shallow(<Header />);
+    wrapper = shallow(<Header login={false}/>);
     state = {
       login: false
     }
