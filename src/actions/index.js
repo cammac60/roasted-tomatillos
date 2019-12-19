@@ -3,4 +3,12 @@ export const addMovies = movies => ({
   movies
 })
 
-// export const 
+export const addLoaded = isLoaded => ({
+  type: 'IS_LOADED',
+  isLoaded
+})
+
+export const hasError = error => ({
+  type: 'HAS_ERROR',
+  error
+})
