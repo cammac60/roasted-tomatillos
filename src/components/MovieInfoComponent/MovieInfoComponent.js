@@ -34,7 +34,7 @@ class MovieInfoComponent extends Component {
           <div className='title-div'><h2>{`${title} (${year})`}</h2></div>
           <div className='img-container' style={cardStyles}></div>
           <section className='overview-box'>
-            <h3>Avr.Rating: {average_rating}</h3>
+            <h3>Avr.Rating: {average_rating.toFixed(1)}</h3>
             {this.props.login && <h3>Your rating: {average_rating}</h3>}
             <p>{overview}</p>
           </section>
