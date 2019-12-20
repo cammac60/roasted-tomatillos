@@ -57,6 +57,10 @@ export class Login extends Component {
       catch (error) {
         console.error(error.message)
       }
+      this.setState({
+        email: '',
+        password: ''
+      });
     }
   }
 

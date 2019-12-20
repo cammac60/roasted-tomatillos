@@ -23,4 +23,5 @@ export const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps)(Header);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
