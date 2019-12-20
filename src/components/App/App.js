@@ -10,10 +10,6 @@ import { getMovies } from '../../apiCalls/apiCalls';
 import { addMovies, addLoaded, hasError } from '../../actions';
 
 export class App extends Component {
-  constructor(props) {
-    super(props)
-  }
-  
   componentDidMount() {
     this.fetchMoviesData()
   }
@@ -41,7 +37,7 @@ export class App extends Component {
           </>
         }/>
         <Route path="/login" render={() => <div color="white">Temporary text</div>}/>
-        <Route path="/movies/:id" render={( { match } ) => 
+        <Route path="/movies/:id" render={( { match } ) =>
           <>
             <Header />
             <MovieInfoComponent id={match.params.id} />

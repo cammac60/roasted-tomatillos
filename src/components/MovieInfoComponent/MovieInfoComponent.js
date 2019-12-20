@@ -1,36 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './MovieInfoComponent.scss'
+import { Redirect } from 'react-router-dom';
 
-const MovieInfoComponent = (props) => {
-  const film = props.movie
-  const cardStyles = {
-    backgroundImage: `url("${film.poster_path}")`,
-    backgroundSize: '100%',
-    backgroundPosition: 'center',
-    width: '230px',
-    height: '300px'
+class MovieInfoComponent extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isRedirected: false
+    }
   }
-  return (
-    <div>
-      <div className='title-div'><h2>{film.title}</h2></div>
-      <article className='img-container' style={cardStyles}>
-      <article className='release-date'></article>
-      </article>
+  redirect = () => {
+    this.setState({isRedirected: true})
+  }
 
-      <section className='overview-box'>
-        <h3>Released: {film.release_date}</h3>
-        <p>{film.overview}</p>
-      </section>
-    </div>
-  )
+  render() {
+    const { title, release_date, poster_path, overview, average_rating} = this.props.movie;
+    const year = release_date.split('-')[0];
+
+    const cardStyles = {
+      backgroundImage: `url(${poster_path})`,
+      backgroundSize: '100%',
+      backgroundPosition: 'center',
+      width: '230px',
+      height: '300px'
+    }
+
+    return (
+      (this.state.isRedirected)
+        ? <Redirect to='/' />
+        : <main className="single-movie-info">
+          <button onClick={this.redirect}>&#8592; back to all movies</button>
+          <div className='title-div'><h2>{`${title} (${year})`}</h2></div>
+          <div className='img-container' style={cardStyles}></div>
+          <section className='overview-box'>
+            <h3>Avr.Rating: {average_rating}</h3>
+            {this.props.login && <h3>Your rating: {average_rating}</h3>}
+            <p>{overview}</p>
+          </section>
+        </main>
+    )
+  }
 }
 
-export const mapStateToProps = (state, props) => {
-  return ({  
-      movie: state.movies.find(movie => movie.id === parseInt(props.id))
-  })
-}
+export const mapStateToProps = (state, props) => ({
+  movie: state.movies.find(movie => movie.id === parseInt(props.id)),
+  login: state.login
+});
 
 export default connect(mapStateToProps)(MovieInfoComponent);
 
