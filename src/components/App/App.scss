@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .App {
   background-color: rgba(0,0,0,0.7);
   background-image: url('../../assets/images/Delphi-Lux-cinema-1-1024x682.jpg');
@@ -6,4 +8,15 @@
   margin: 0;
   width: 100vw; height: 100vh;
   overflow: hidden;
+}
+
+h2 {
+  &.error {
+    color: #fff;
+    margin: auto;
+    background-color: $main-background-color-transparent;
+    backdrop-filter: blur(4px);
+    border: 1px solid $main-accent-color;
+    padding: 40px;
+  }
 }
