@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './App.scss';
 import MoviesContainer from '../../containers/MoviesContainer/MoviesContainer';
 import Header from '../Header/Header.js';
+import RatingsPage from '../RatingsPage/RatingsPage';
 import { Route } from 'react-router-dom';
 import { getMovies } from '../../apiCalls/apiCalls';
 import { addMovies, addLoaded, hasError } from '../../actions';
@@ -40,6 +41,12 @@ export class App extends Component {
           </>
         }/>
         <Route path="/login" render={() => <div color="white">Temporary text</div>}/>
+        <Route path="/ratings" render={() => (
+          <>
+            <Header />
+            <RatingsPage />
+          </>
+        )}/>
       </div>
     );
   }
