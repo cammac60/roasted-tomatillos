@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import SmallMovieCard from './SmallMovieCard';
 
 describe("SmallMovieCard", () => {
-  let card, mockProps;
+  let card, mockProps, instance;
 
   beforeEach(() => {
     mockProps = {
@@ -16,9 +16,18 @@ describe("SmallMovieCard", () => {
     card = shallow(
       <SmallMovieCard { ...mockProps } />
     )
+
+    instance = card.instance()
   });
 
   it("should match snapshot with all data passed in correctly", () => {
+    const cardWithDeleteButton = shallow(
+      <SmallMovieCard { ...mockProps } deleteButton={true} />
+    )
+    expect(cardWithDeleteButton).toMatchSnapshot();
+  });
+
+  it("should match snapshot with all data passed in correctly except delete button", () => {
     expect(card).toMatchSnapshot();
   });
 
@@ -27,10 +36,19 @@ describe("SmallMovieCard", () => {
     expect(card).toMatchSnapshot();
   });
 
-  it("should change redirect state to true after click on card", () => {
+  it("should call redirect after title was clicked", () => {
+    const spy = jest.spyOn(instance, 'redirect').mockImplementation(() => {});
+    instance.forceUpdate();
+
+    card.find('.title').simulate('click');
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it("should change isRedirected state to true when redirect is called", () => {
     expect(card.state('isRedirected')).toEqual(false);
 
-    card.find('section').simulate('click');
+    instance.redirect();
 
     expect(card.state('isRedirected')).toEqual(true);
   });
