@@ -5,15 +5,12 @@ import './App.scss';
 import MoviesContainer from '../../containers/MoviesContainer/MoviesContainer';
 import Header from '../Header/Header.js';
 import RatingsPage from '../RatingsPage/RatingsPage';
+import MovieInfoComponent from '../MovieInfoComponent/MovieInfoComponent';
 import { Route } from 'react-router-dom';
 import { getMovies } from '../../apiCalls/apiCalls';
 import { addMovies, addLoaded, hasError } from '../../actions';
 
 export class App extends Component {
-  constructor(props) {
-    super(props)
-  }
-  
   componentDidMount() {
     this.fetchMoviesData()
   }
@@ -47,6 +44,12 @@ export class App extends Component {
             <RatingsPage />
           </>
         )}/>
+        <Route path="/movies/:id" render={( { match } ) =>
+          <>
+            <Header />
+            <MovieInfoComponent id={match.params.id} />
+          </>
+        }/>
       </div>
     );
   }
