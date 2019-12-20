@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import './App.scss';
 import MoviesContainer from '../../containers/MoviesContainer/MoviesContainer';
 import Header from '../Header/Header.js';
@@ -13,7 +14,7 @@ export class App extends Component {
   constructor(props) {
     super(props)
   }
-  
+
   componentDidMount() {
     this.fetchMoviesData()
   }

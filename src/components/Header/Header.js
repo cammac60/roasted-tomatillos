@@ -3,9 +3,9 @@ import './Header.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Header = ({ login }) => {
+const Header = ({ user }) => {
   let toggleLogin;
-  login ?
+  user.id ?
   toggleLogin = <button id="logout" className="toggleLogin">Logout</button> : toggleLogin = <Link id="login-link" to="/login">
     <button id="login" className="toggleLogin">
       Login
@@ -19,8 +19,8 @@ const Header = ({ login }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  login: state.login
+export const mapStateToProps = state => ({
+  user: state.user
 });
 
 export default connect(mapStateToProps)(Header);
