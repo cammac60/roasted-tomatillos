@@ -16,23 +16,6 @@ export class Login extends Component {
     }
   }
 
-  render() {
-    return (
-      <form className="login-form">
-        <h3>Please sign in to continue</h3>
-        <div className="input-wrapper">
-          <div className="error">{this.state.errorMsg}</div>
-          <label>Email:</label>
-          <input autoComplete="off" id="email" value={this.state.username} type="text" onChange={(event) => this.handleChange(event)}/>
-          <label>Password:</label>
-          <input id="password" value={this.state.password} type="password" onChange={(event) => this.handleChange(event)}/>
-          <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign in</button>
-          <Link id="back-home" to="/">Go back</Link>
-        </div>
-      </form>
-    )
-  }
-
   handleChange = (event) => {
     let { target } = event;
     if (this.state.email && this.state.password) {
@@ -69,8 +52,7 @@ export class Login extends Component {
       };
       try {
         const result = await postSignIn(user)
-        console.log(addUser(result.user).user)
-        addUser(result.user)
+        this.props.addUser(result.user)
       }
       catch (error) {
         console.error(error.message)
@@ -78,12 +60,28 @@ export class Login extends Component {
     }
   }
 
+  render() {
+    return (
+      <form className="login-form">
+        <h3>Please sign in to continue</h3>
+        <div className="input-wrapper">
+          <div className="error">{this.state.errorMsg}</div>
+          <label>Email:</label>
+          <input autoComplete="off" id="email" value={this.state.username} type="text" onChange={(event) => this.handleChange(event)}/>
+          <label>Password:</label>
+          <input id="password" value={this.state.password} type="password" onChange={(event) => this.handleChange(event)}/>
+          <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign in</button>
+          <Link id="back-home" to="/">Go back</Link>
+        </div>
+      </form>
+    )
+  }
 }
 
 export const mapDispatchToProps = dispatch => (
-  {
+  bindActionCreators({
     addUser
-  }
+  }, dispatch)
 )
 
 export default connect(null, mapDispatchToProps)(Login);
