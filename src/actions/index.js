@@ -18,7 +18,7 @@ export const addUser = user => ({
   user
 });
 
-export const removeUser = user => ({
+export const removeUser = () => ({
   type: 'REMOVE_USER',
-  user
+  user: {}
 });

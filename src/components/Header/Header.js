@@ -2,11 +2,13 @@ import React from 'react';
 import './Header.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { removeUser } from '../../actions';
 
-const Header = ({ user }) => {
+const Header = ({ user, removeUser }) => {
   let toggleLogin;
   user.id ?
-  toggleLogin = <button id="logout" className="toggleLogin">Logout</button> : toggleLogin = <Link id="login-link" to="/login">
+  toggleLogin = <button id="logout" className="toggleLogin" onClick={removeUser}>Logout</button> : toggleLogin = <Link id="login-link" to="/login">
     <button id="login" className="toggleLogin">
       Login
     </button>
@@ -23,4 +25,10 @@ export const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps)(Header);
+export const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    removeUser
+  }, dispatch)
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
