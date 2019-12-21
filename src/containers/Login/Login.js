@@ -66,9 +66,11 @@ export class Login extends Component {
 
   render() {
     let signInBtn;
+
     this.state.email && this.state.password ?
     signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}><Link id="sign-in-link" to="/"> Sign in</Link></button> :
-    signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign In</button>
+    signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign In</button>;
+
     return (
       <form className="login-form">
         <h3>Please sign in to continue</h3>
