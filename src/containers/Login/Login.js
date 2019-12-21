@@ -56,6 +56,7 @@ export class Login extends Component {
       }
       catch (error) {
         console.error(error.message)
+        this.setState({errorMsg: 'Your email or password was incorrect'});
       }
       this.setState({
         email: '',
@@ -68,7 +69,7 @@ export class Login extends Component {
     let signInBtn;
 
     this.state.email && this.state.password ?
-    signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}><Link id="sign-in-link" to="/"> Sign in</Link></button> :
+    signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}><Link id="sign-in-link" to="/" onClick={(event) => this.handleSubmit(event)}> Sign in</Link></button> :
     signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign In</button>;
 
     return (
