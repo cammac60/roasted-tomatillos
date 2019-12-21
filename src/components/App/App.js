@@ -5,16 +5,13 @@ import { Redirect } from 'react-router-dom';
 import './App.scss';
 import MoviesContainer from '../../containers/MoviesContainer/MoviesContainer';
 import Header from '../Header/Header.js';
-import Login from '../../containers/Login/Login';
+import MovieInfoComponent from '../MovieInfoComponent/MovieInfoComponent';
 import { Route } from 'react-router-dom';
 import { getMovies } from '../../apiCalls/apiCalls';
 import { addMovies, addLoaded, hasError } from '../../actions';
+import Login from '../../containers/Login/Login';
 
 export class App extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     this.fetchMoviesData()
   }
@@ -42,6 +39,12 @@ export class App extends Component {
           </>
         }/>
         <Route path="/login" render={() => <Login />}/>
+        <Route path="/movies/:id" render={( { match } ) =>
+          <>
+            <Header />
+            <MovieInfoComponent id={match.params.id} />
+          </>
+        }/>
       </div>
     );
   }

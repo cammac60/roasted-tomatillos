@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { removeUser } from '../../actions';
 
-const Header = ({ user, removeUser }) => {
+export const Header = ({ user, removeUser }) => {
   let toggleLogin;
   user.id ?
   toggleLogin = <button id="logout" className="toggleLogin" onClick={removeUser}>Logout</button> : toggleLogin = <Link id="login-link" to="/login">

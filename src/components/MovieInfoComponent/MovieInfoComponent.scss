@@ -1,0 +1,57 @@
+@import "../../variables.scss";
+.single-movie-info {
+  h2 {
+    margin-top: 100px;
+    margin-left: 350px;
+    display: inline-block;
+    padding: 20px;
+    border: $main-accent-color solid 3px;
+    background: $main-background-color-transparent;
+    color: #fff;
+    text-shadow: 0 0 24px #000;
+  }
+  button {
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    background: none;
+    border: none;
+    margin: 30px 60px;
+    position: absolute;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.img-container {
+  position: absolute;
+  left: 100px;
+  top: 160px;
+  z-index: 1;
+  box-shadow: 0 0 48px 0 #000;
+}
+
+.overview-box {
+  border: $main-accent-color solid 3px;
+  background: $main-background-color-transparent;
+  backdrop-filter: blur(4px);
+  width: 55%;
+  min-height: 300px;
+  max-height: 500px;
+  overflow-x: scroll;
+  margin: auto;
+  padding: 20px 20px 20px 90px;
+  h3 {
+    margin: 0;
+    &:first-child {
+      margin-bottom: 5px;
+    }
+  }
+  p {
+    line-height: 1.5em;
+  }
+  h3, p {
+    color: $main-text-color;
+  }
+}
