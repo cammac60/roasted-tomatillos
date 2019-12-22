@@ -12,7 +12,7 @@ export class MoviesContainer extends Component {
         key={movie.id}
         id={movie.id}
         img={movie.poster_path}
-        rate={movie.average_rating}
+        rate={movie.average_rating.toFixed(1)}
         title={movie.title} />
     ));
   }
