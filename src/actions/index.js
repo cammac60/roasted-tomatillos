@@ -12,3 +12,8 @@ export const hasError = error => ({
   type: 'HAS_ERROR',
   error
 })
+
+export const addRatings = ratings => ({
+  type: 'ADD_RATINGS',
+  ratings
+})

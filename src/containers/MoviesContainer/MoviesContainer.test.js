@@ -43,10 +43,10 @@ describe("MoviesContainer", () => {
     });
 
     it("should match snapshot if there is error after fetch", () => {
-      const containerLoading = shallow(
+      const containerError = shallow(
         <MoviesContainer {...store} error="Failed to fetch" />
       );
-      expect(containerLoading).toMatchSnapshot();
+      expect(containerError).toMatchSnapshot();
     });
 
     it("should call createCards method after rendering", () => {

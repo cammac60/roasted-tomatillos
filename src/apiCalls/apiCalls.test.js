@@ -1,4 +1,4 @@
-import { getMovies, postRating } from './apiCalls'
+import { getMovies, getRatings, postRating } from './apiCalls'
 
 describe('getMovies', () => {
   let mockMoviesData =
@@ -82,7 +82,7 @@ describe("postRating", () => {
       })
     })
   })
-
+  
   it("should call fetch with correct url and options", () => {
     postRating(mockRating, 2)
 
@@ -99,6 +99,7 @@ describe("postRating", () => {
         ok: false
       })
     })
+    
     expect(postRating(mockRating, 2)).rejects.toEqual(Error('There was an error posting rating.'))
   })
 
@@ -107,5 +108,55 @@ describe("postRating", () => {
       return Promise.reject(Error('Fetch is failed'))
     })
     expect(postRating(mockRating, 2)).rejects.toEqual(Error('Fetch is failed'))
+  })
+})
+        
+describe('getRatings', () => {
+  let mockRatingsData =
+    [{
+      id: 1,
+      user_id: 1,
+      movie_id: 1,
+      rating: 6,
+      created_at: "someDate",
+      updated_at: "someDate"
+    }]
+
+  beforeEach(() => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => {
+          return Promise.resolve(mockRatingsData)
+        }
+      })
+    })
+  })
+  it('should be passed down the correct URL', () => {
+    getRatings(1)
+    expect(window.fetch).toHaveBeenCalledWith('https://rancid-tomatillos.herokuapp.com/api/v1/users/1/ratings')
+  })
+
+  it('should return an array the correct values types', () => {
+    expect(getRatings(1)).resolves.toEqual(mockRatingsData)
+  })
+
+  it('should return an error for response that is not ok', () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: false
+      })
+    })
+    expect(getRatings()).rejects
+      .toEqual(Error("There was an error getting ratings."))
+  })
+
+  it('should return an error if fetch is rejected', () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.reject(Error('Failed to fetch'))
+    })
+
+    expect(getRatings()).rejects
+      .toEqual(Error('Failed to fetch'))
   })
 })

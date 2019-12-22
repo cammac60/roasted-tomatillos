@@ -14,22 +14,14 @@ describe('ratings', () => {
 
   it('should return the ratings array if action type is ADD_RATINGS', () => {
     // Setup
-    const mockRatingsData =
-      [{
-        id: 2,
-        user_id: 2,
-        movie_id: 2,
-        rating: 7,
-        created_at: "2019-12-16",
-        updated_at: "2019-12-16"
-      }];
+    const mockRatings = [{id: 1, movie_id: 1, rating: 6}];
 
     const mockAction = {
       type: 'ADD_RATINGS',
-      ratings: mockRatingsData
+      ratings: mockRatings
     }
 
-    const expected = mockRatingsData;
+    const expected = mockRatings;
 
     // Execution
     const result = ratings(null, mockAction);
