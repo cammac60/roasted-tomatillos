@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './MovieInfoComponent.scss'
 import { Redirect } from 'react-router-dom';
+import RatingBox from '../RatingBox/RatingBox'
 
 class MovieInfoComponent extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class MovieInfoComponent extends Component {
   }
 
   render() {
-    const { title, release_date, poster_path, overview, average_rating} = this.props.movie;
+    const { movie, rating, login, user} = this.props
+    const { id, title, release_date, poster_path, overview, average_rating} = movie;
     const year = release_date.split('-')[0];
 
     const cardStyles = {
@@ -35,17 +37,22 @@ class MovieInfoComponent extends Component {
           <div className='img-container' style={cardStyles}></div>
           <section className='overview-box'>
             <h3>Avr.Rating: {average_rating}</h3>
-            {this.props.login && <h3>Your rating: {average_rating}</h3>}
+            {login && rating && <h3>{`Your rating: ${rating.rating}`}</h3>}
             <p>{overview}</p>
+            <footer>
+              {login && !rating && <RatingBox movie_id={id} user_id={user.id} />}
+            </footer>
           </section>
         </main>
     )
   }
 }
 
-export const mapStateToProps = (state, props) => ({
-  movie: state.movies.find(movie => movie.id === parseInt(props.id)),
-  login: state.login
+export const mapStateToProps = ({movies, ratings, login, user}, props) => ({
+  movie: movies.find(movie => movie.id === parseInt(props.id)),
+  rating: ratings.find(rating => rating.movie_id === parseInt(props.id)),
+  login,
+  user
 });
 
 export default connect(mapStateToProps)(MovieInfoComponent);
