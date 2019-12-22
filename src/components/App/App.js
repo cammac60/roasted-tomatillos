@@ -6,12 +6,14 @@ import MoviesContainer from '../../containers/MoviesContainer/MoviesContainer';
 import Header from '../Header/Header.js';
 import MovieInfoComponent from '../MovieInfoComponent/MovieInfoComponent';
 import { Route } from 'react-router-dom';
-import { getMovies } from '../../apiCalls/apiCalls';
-import { addMovies, addLoaded, hasError } from '../../actions';
+import { getMovies, getRatings } from '../../apiCalls/apiCalls';
+import { addMovies, addLoaded, hasError, addRatings } from '../../actions';
 
 export class App extends Component {
   componentDidMount() {
-    this.fetchMoviesData()
+    const {isLoaded, login} = this.props;
+    if (!isLoaded) this.fetchMoviesData()
+    if (login) this.fetchRatingsData()
   }
 
   fetchMoviesData = async () => {
@@ -24,6 +26,17 @@ export class App extends Component {
     catch (error) {
       addLoaded(false)
       hasError(error.message)
+    }
+  }
+
+  fetchRatingsData = async () => {
+    const { addRatings, user } = this.props;
+    try {
+      const result = await getRatings(user.id);
+      addRatings(result.ratings);
+    }
+    catch {
+      addRatings([ ]);
     }
   }
 
@@ -48,12 +61,19 @@ export class App extends Component {
   }
 }
 
+export const mapStateToProps = ({isLoaded, user, login}) => ({
+  user,
+  isLoaded,
+  login
+})
+
 export const mapDispatchToProps = dispatch => (
   bindActionCreators({
     addMovies,
     addLoaded,
-    hasError
+    hasError,
+    addRatings
   }, dispatch)
 )
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
