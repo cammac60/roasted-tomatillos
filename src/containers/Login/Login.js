@@ -67,12 +67,6 @@ export class Login extends Component {
   }
 
   render() {
-    let signInBtn;
-
-    this.state.email && this.state.password ?
-    signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign in</button> :
-    signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign In</button>;
-
     return (
       <form className="login-form">
         <h3>Please sign in to continue</h3>
@@ -82,7 +76,7 @@ export class Login extends Component {
           <input autoComplete="off" id="email" value={this.state.email} type="text" onChange={(event) => this.handleChange(event)}/>
           <label>Password:</label>
           <input id="password" value={this.state.password} type="password" onChange={(event) => this.handleChange(event)}/>
-          {signInBtn}
+          <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign in</button>
           <Link id="back-home" to="/">Go back</Link>
         </div>
       </form>
