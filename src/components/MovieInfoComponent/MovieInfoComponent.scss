@@ -10,14 +10,16 @@
     color: #fff;
     text-shadow: 0 0 24px #000;
   }
+  &>button {
+    margin: 30px 60px;
+    position: absolute;
+  }
   button {
     color: #fff;
     cursor: pointer;
     font-size: 18px;
     background: none;
     border: none;
-    margin: 30px 60px;
-    position: absolute;
     &:hover {
       transform: scale(1.1);
     }
@@ -37,9 +39,6 @@
   background: $main-background-color-transparent;
   backdrop-filter: blur(4px);
   width: 55%;
-  min-height: 300px;
-  max-height: 500px;
-  overflow-x: scroll;
   margin: auto;
   padding: 20px 20px 20px 90px;
   h3 {
@@ -48,10 +47,24 @@
       margin-bottom: 5px;
     }
   }
-  p {
+  &>p {
     line-height: 1.5em;
+    min-height: 100px;
+    max-height: 300px;
+    overflow-x: scroll;
   }
   h3, p {
     color: $main-text-color;
+  }
+  footer {
+    text-align: center;
+    width: 100%;
+    margin-top: 80px;
+    button {
+      margin: auto;
+      background-color: $main-accent-color;
+      border-radius: 20px;
+      padding: 0.4em 2em;
+    }
   }
 }

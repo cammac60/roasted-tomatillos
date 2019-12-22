@@ -1,4 +1,4 @@
-import { getMovies, getRatings } from './apiCalls'
+import { getMovies, getRatings, postRating } from './apiCalls'
 
 describe('getMovies', () => {
   let mockMoviesData =
@@ -55,6 +55,62 @@ describe('getMovies', () => {
   })
 })
 
+describe("postRating", () => {
+  let mockOptions
+  const mockRating = {
+    id: 2,
+    user_id: 2,
+    movie_id: 2,
+    rating: 7,
+    created_at: "2019-12-16",
+    updated_at: "2019-12-16"
+  }
+
+  beforeEach(() => {
+    mockOptions = {
+      method: 'POST',
+      body: JSON.stringify(mockRating),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(mockRating)
+      })
+    })
+  })
+  
+  it("should call fetch with correct url and options", () => {
+    postRating(mockRating, 2)
+
+    expect(window.fetch).toHaveBeenCalledWith('https://rancid-tomatillos.herokuapp.com/api/v1/users/2/ratings', mockOptions)
+  })
+
+  it("should return array if fetch is completed correctly", () => {
+    expect(postRating(mockRating, 2)).resolves.toEqual(mockRating)
+  })
+
+  it("should return error if fetch is completed incorrectly", () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: false
+      })
+    })
+    
+    expect(postRating(mockRating, 2)).rejects.toEqual(Error('There was an error posting rating.'))
+  })
+
+  it("should return error if fetch is failed", () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.reject(Error('Fetch is failed'))
+    })
+    expect(postRating(mockRating, 2)).rejects.toEqual(Error('Fetch is failed'))
+  })
+})
+        
 describe('getRatings', () => {
   let mockRatingsData =
     [{
@@ -76,7 +132,6 @@ describe('getRatings', () => {
       })
     })
   })
-
   it('should be passed down the correct URL', () => {
     getRatings(1)
     expect(window.fetch).toHaveBeenCalledWith('https://rancid-tomatillos.herokuapp.com/api/v1/users/1/ratings')
@@ -92,7 +147,6 @@ describe('getRatings', () => {
         ok: false
       })
     })
-
     expect(getRatings()).rejects
       .toEqual(Error("There was an error getting ratings."))
   })

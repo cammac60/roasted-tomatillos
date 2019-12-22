@@ -1,4 +1,4 @@
-import { ratings } from '../reducers/ratings';
+import { ratings } from './ratings';
 
 describe('ratings', () => {
   it('should return the initial state', () => {

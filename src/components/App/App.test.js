@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { App, mapDispatchToProps } from './App';
-import { getMovies } from '../../apiCalls/apiCalls';
-import { addMovies, addLoaded, hasError } from '../../actions';
+import { App, mapStateToProps, mapDispatchToProps } from './App';
+import { getMovies, getRatings } from '../../apiCalls/apiCalls';
+import { addMovies, addLoaded, hasError, addRatings } from '../../actions';
 
 jest.mock('../../apiCalls/apiCalls');
 
@@ -17,20 +17,38 @@ describe("App", () => {
       overview: 'In Jumanji: The Next Level, the gang is back but the game has changed.',
       average_rating: 4
     }];
+  const mockRatingsData =
+    [{
+      id: 1,
+      user_id: 1,
+      movie_id: 1,
+      rating: 7,
+      created_at: "2019-12-16",
+      updated_at: "2019-12-16"
+    }];
 
   describe("App component", () => {
     let app, instance;
     const addMovies = jest.fn();
     const addLoaded = jest.fn();
     const hasError = jest.fn();
+    const addRatings = jest.fn();
+
+    const mockProps = {
+      isLoaded: true,
+      user: {},
+      login: false,
+      addMovies: addMovies,
+      addLoaded: addLoaded,
+      hasError: hasError,
+      addRatings: addRatings
+    }
 
     beforeEach(() => {
       app = shallow(
-        <App
-          addMovies={addMovies}
-          addLoaded={addLoaded}
-          hasError={hasError} />
+        <App {...mockProps} />
       )
+
       instance = app.instance()
     });
 
@@ -38,24 +56,31 @@ describe("App", () => {
       expect(app).toMatchSnapshot();
     });
 
-    it("should call fetchMoviesData method after rendering", async () => {
-      const spy = jest.spyOn(instance, 'fetchMoviesData')
-        .mockImplementation(() => {
-          return Promise.resolve(mockMoviesData)
-        });
-
-      instance.forceUpdate()
-
-      await instance.componentDidMount()
-
-      expect(spy).toHaveBeenCalled();
-    });
-
     describe("fetchMoviesData", () => {
       beforeEach(() => {
         getMovies.mockImplementation(() => {
           return Promise.resolve({movies: mockMoviesData})
         });
+
+        app = shallow(
+          <App
+            {...mockProps}
+            isLoaded={false} />
+        )
+
+        instance = app.instance()
+      });
+
+      it("should call fetchMoviesData method after rendering if there is no fetched movies data", async () => {
+        const spy = jest.spyOn(instance, 'fetchMoviesData')
+          .mockImplementation(() => {
+            return Promise.resolve(mockMoviesData)
+          });
+        instance.forceUpdate()
+
+        await instance.componentDidMount()
+
+        expect(spy).toHaveBeenCalled();
       });
 
       it("should call getMovies", async () => {
@@ -97,6 +122,82 @@ describe("App", () => {
         expect(hasError).toHaveBeenCalledWith('Failed to fetch');
       });
     });
+
+    describe("fetchRatingsData", () => {
+      beforeEach(() => {
+        getRatings.mockImplementation(() => {
+          return Promise.resolve({ratings: mockRatingsData})
+        });
+
+        app = shallow(
+          <App
+            {...mockProps}
+            user={{id:1}}
+            login={true} />
+        )
+
+        instance = app.instance()
+      });
+
+      it("should call fetchRatingsData method after rendering if there is user logged", async () => {
+        const spy = jest.spyOn(instance, 'fetchRatingsData')
+          .mockImplementation(() => {
+            return Promise.resolve(mockRatingsData)
+          });
+        instance.forceUpdate()
+
+        await instance.componentDidMount()
+
+        expect(spy).toHaveBeenCalled();
+      });
+
+      it("should call getRatings", async () => {
+        await instance.fetchRatingsData()
+
+        expect(getRatings).toHaveBeenCalledWith(1);
+      });
+
+      it("should call addRatings prop with movies as argument if fetch is completed correctly", async () => {
+
+        await instance.fetchRatingsData()
+
+        expect(addRatings).toHaveBeenCalledWith(mockRatingsData);
+      });
+
+      it("should call addRatings prop with error as argument if fetch is failed ", async () => {
+        getRatings.mockImplementation(() => {
+          return Promise.reject(Error('Failed to fetch'))
+        });
+
+        await instance.fetchRatingsData()
+
+        expect(addRatings).toHaveBeenCalledWith([ ]);
+      });
+    });
+  });
+
+  describe('mapStateToProps', () => {
+    it('should return an object with login state and user id', () => {
+      // Setup
+      const mockState = {
+        isLoaded: true,
+        user_id: 1,
+        login: true,
+        user: {id: 1}
+      };
+
+      const expected = {
+        isLoaded: true,
+        user: {id: 1},
+        login: true
+      };
+
+      // Execution
+      const mappedProps = mapStateToProps(mockState);
+
+      // Expectation
+      expect(mappedProps).toEqual(expected);
+    });
   });
 
   describe('mapDispatchToProps', () => {
@@ -130,6 +231,15 @@ describe("App", () => {
       const actionToDispatch = hasError(mockMoviesData);
       // Execution
       mappedProps.hasError(mockMoviesData);
+      // Expectaion
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('calls dispatch with an addRatings action when addRatings is called', () => {
+      // Setup
+      const actionToDispatch = addRatings(mockRatingsData);
+      // Execution
+      mappedProps.addRatings(mockRatingsData);
       // Expectaion
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
