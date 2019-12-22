@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { postSignIn } from '../../apiCalls/apiCalls';
@@ -7,8 +7,8 @@ import { addUser } from '../../actions';
 import './Login.scss';
 
 export class Login extends Component {
-  constructor(state) {
-    super(state);
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: '',
@@ -62,6 +62,7 @@ export class Login extends Component {
         email: '',
         password: ''
       });
+      this.props.history.push('/');
     }
   }
 
@@ -69,7 +70,7 @@ export class Login extends Component {
     let signInBtn;
 
     this.state.email && this.state.password ?
-    signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}><Link id="sign-in-link" to="/" onClick={(event) => this.handleSubmit(event)}> Sign in</Link></button> :
+    signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign in</button> :
     signInBtn = <button className="sign-in" onClick={(event) => this.handleSubmit(event)}>Sign In</button>;
 
     return (
@@ -78,7 +79,7 @@ export class Login extends Component {
         <div className="input-wrapper">
           <div className="error">{this.state.errorMsg}</div>
           <label>Email:</label>
-          <input autoComplete="off" id="email" value={this.state.username} type="text" onChange={(event) => this.handleChange(event)}/>
+          <input autoComplete="off" id="email" value={this.state.email} type="text" onChange={(event) => this.handleChange(event)}/>
           <label>Password:</label>
           <input id="password" value={this.state.password} type="password" onChange={(event) => this.handleChange(event)}/>
           {signInBtn}
@@ -95,4 +96,4 @@ export const mapDispatchToProps = dispatch => (
   }, dispatch)
 )
 
-export default connect(null, mapDispatchToProps)(Login);
+export default withRouter(connect(null, mapDispatchToProps)(Login));
