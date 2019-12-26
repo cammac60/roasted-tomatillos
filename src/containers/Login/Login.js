@@ -62,7 +62,7 @@ export class Login extends Component {
         email: '',
         password: ''
       });
-      this.props.history.push('/');
+      this.props.history.push('/ratings');
     }
   }
 
