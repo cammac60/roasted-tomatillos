@@ -3,7 +3,44 @@
 exports[`SmallMovieCard should match snapshot with all data passed in correctly 1`] = `
 <section
   className="small-movie-card"
-  onClick={[Function]}
+>
+  <header
+    style={
+      Object {
+        "backgroundImage": "url(\\"https://some.url/img.jpg\\")",
+        "backgroundPosition": "center",
+        "backgroundSize": "100%",
+        "height": "300px",
+        "width": "230px",
+      }
+    }
+  >
+    <img
+      alt="delete icon"
+      src="delete.svg"
+    />
+  </header>
+  <p
+    className="rate-number"
+  >
+    4
+  </p>
+  <div
+    className="title-block"
+  >
+    <p
+      className="title"
+      onClick={[Function]}
+    >
+      Jumanji: The Next Level
+    </p>
+  </div>
+</section>
+`;
+
+exports[`SmallMovieCard should match snapshot with all data passed in correctly except delete button 1`] = `
+<section
+  className="small-movie-card"
 >
   <header
     style={
@@ -24,7 +61,10 @@ exports[`SmallMovieCard should match snapshot with all data passed in correctly 
   <div
     className="title-block"
   >
-    <p>
+    <p
+      className="title"
+      onClick={[Function]}
+    >
       Jumanji: The Next Level
     </p>
   </div>

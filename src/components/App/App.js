@@ -5,15 +5,18 @@ import { Redirect } from 'react-router-dom';
 import './App.scss';
 import MoviesContainer from '../../containers/MoviesContainer/MoviesContainer';
 import Header from '../Header/Header.js';
+import RatingsPage from '../RatingsPage/RatingsPage';
 import MovieInfoComponent from '../MovieInfoComponent/MovieInfoComponent';
 import { Route } from 'react-router-dom';
-import { getMovies } from '../../apiCalls/apiCalls';
-import { addMovies, addLoaded, hasError } from '../../actions';
+import { getMovies, getRatings } from '../../apiCalls/apiCalls';
+import { addMovies, addLoaded, hasError, addRatings } from '../../actions';
 import Login from '../../containers/Login/Login';
 
 export class App extends Component {
   componentDidMount() {
-    this.fetchMoviesData()
+    const {isLoaded, login} = this.props;
+    if (!isLoaded) this.fetchMoviesData()
+    if (login) this.fetchRatingsData()
   }
 
   fetchMoviesData = async () => {
@@ -29,6 +32,17 @@ export class App extends Component {
     }
   }
 
+  fetchRatingsData = async () => {
+    const { addRatings, user } = this.props;
+    try {
+      const result = await getRatings(user.id);
+      addRatings(result.ratings);
+    }
+    catch {
+      addRatings([ ]);
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -38,6 +52,12 @@ export class App extends Component {
             <MoviesContainer />
           </>
         }/>
+        <Route path="/ratings" render={() => (
+          <>
+            <Header />
+            <RatingsPage />
+          </>
+        )}/>
         <Route path="/login" render={() => <Login />}/>
         <Route path="/movies/:id" render={( { match } ) =>
           <>
@@ -50,12 +70,19 @@ export class App extends Component {
   }
 }
 
+export const mapStateToProps = ({isLoaded, user, login}) => ({
+  user,
+  isLoaded,
+  login
+})
+
 export const mapDispatchToProps = dispatch => (
   bindActionCreators({
     addMovies,
     addLoaded,
-    hasError
+    hasError,
+    addRatings
   }, dispatch)
 )
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RatingsPage RatingsPage component should match snapshop if redirect is true 1`] = `
+<Redirect
+  to="/"
+/>
+`;
+
+exports[`RatingsPage RatingsPage component should match snapshop if there is no user logged 1`] = `
+<div
+  className="ratings"
+>
+  <button
+    onClick={[Function]}
+  >
+    ← back to all movies
+  </button>
+  <h2
+    className="error"
+  >
+    Please, log in to see your ratings!
+  </h2>
+</div>
+`;
+
+exports[`RatingsPage RatingsPage component should match snapshop if there is user logged but no ratings 1`] = `
+<div
+  className="ratings"
+>
+  <button
+    onClick={[Function]}
+  >
+    ← back to all movies
+  </button>
+  <h2
+    className="error"
+  >
+    You don't have any rating yet!
+  </h2>
+</div>
+`;
+
+exports[`RatingsPage RatingsPage component should match snapshop with all data passed in correctly 1`] = `
+<div
+  className="ratings"
+>
+  <button
+    onClick={[Function]}
+  >
+    ← back to all movies
+  </button>
+  <SmallMovieCard
+    deleteButton={true}
+    id={1}
+    img="https://some.url/poster-image"
+    key="1"
+    rate={6}
+    title="Jumanji: The Next Level"
+  />
+</div>
+`;

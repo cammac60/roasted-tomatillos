@@ -6,7 +6,6 @@ import LoadingImage from '../../components/LoadingImage/LoadingImage';
 
 export class MoviesContainer extends Component {
 
-
   createCards = dataset => {
     return dataset.map(movie => (
       <SmallMovieCard
@@ -21,7 +20,7 @@ export class MoviesContainer extends Component {
   render() {
     const { movies, isLoaded, error } = this.props;
     const notification = (error !== '')
-      ? <h2>{error}</h2>
+      ? <h2 className="error">{error}</h2>
       : <LoadingImage />
 
     return (
