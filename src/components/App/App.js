@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import './App.scss';
 import MoviesContainer from '../../containers/MoviesContainer/MoviesContainer';
 import Header from '../Header/Header.js';
@@ -9,6 +10,7 @@ import MovieInfoComponent from '../MovieInfoComponent/MovieInfoComponent';
 import { Route } from 'react-router-dom';
 import { getMovies, getRatings } from '../../apiCalls/apiCalls';
 import { addMovies, addLoaded, hasError, addRatings } from '../../actions';
+import Login from '../../containers/Login/Login';
 
 export class App extends Component {
   componentDidMount() {
@@ -50,13 +52,13 @@ export class App extends Component {
             <MoviesContainer />
           </>
         }/>
-        <Route path="/login" render={() => <div color="white">Temporary text</div>}/>
         <Route path="/ratings" render={() => (
           <>
             <Header />
             <RatingsPage />
           </>
         )}/>
+        <Route path="/login" render={() => <Login />}/>
         <Route path="/movies/:id" render={( { match } ) =>
           <>
             <Header />

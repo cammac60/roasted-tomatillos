@@ -1,0 +1,100 @@
+@import '../../variables.scss';
+
+.login-form {
+  backdrop-filter: blur(4px);
+  background-color: $main-background-color-transparent;
+  border: 2px solid $main-accent-color;
+  color: $main-text-color;
+  font-family: $small-text-font;
+  height: 45%;
+  margin: {
+    left: auto;
+    right: auto;
+    top: 15%;
+  }
+  text-align: center;
+  width: 35%;
+  h3 {
+    font: {
+      family: $large-text-font;
+      size: 2rem;
+    }
+  }
+
+}
+
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: {
+    left: auto;
+    right: auto;
+  }
+  text-align: left;
+  width: 50%;
+  input {
+    font-size: 1.3rem;
+    height: 30px;
+    margin-bottom: 20px;
+    border: none;
+  }
+
+  label {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+}
+
+
+.sign-in {
+  background-color: $main-accent-color;
+  border: none;
+  border-radius: 20px;
+  color: inherit;
+  cursor: pointer;
+  font: {
+    size: 1rem;
+    weight: bold;
+  }
+  margin: {
+    bottom: 10px;
+    left: auto;
+    right: auto;
+  }
+  outline: none;
+  padding: 0.5em 2em;
+  &:hover {
+    background-color: lighten($main-accent-color, 10%);
+  }
+  &:active {
+    background-color: black;
+  }
+}
+
+#back-home {
+  color: $main-text-color;
+  font-size: 0.8rem;
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin: {
+    bottom: 10px;
+    left: auto;
+    right: auto;
+  }
+}
+
+#sign-in-link {
+  color: white;
+  height: 100%;
+  text-decoration: none;
+  width: 100%;
+}

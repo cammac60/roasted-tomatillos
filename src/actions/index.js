@@ -1,12 +1,12 @@
 export const addMovies = movies => ({
   type: 'ADD_MOVIES',
   movies
-})
+});
 
 export const addLoaded = isLoaded => ({
   type: 'IS_LOADED',
   isLoaded
-})
+});
 
 export const hasError = error => ({
   type: 'HAS_ERROR',
@@ -16,4 +16,14 @@ export const hasError = error => ({
 export const addRatings = ratings => ({
   type: 'ADD_RATINGS',
   ratings
-})
+});
+
+export const addUser = user => ({
+  type: 'ADD_USER',
+  user
+});
+
+export const removeUser = () => ({
+  type: 'REMOVE_USER',
+  user: {}
+});

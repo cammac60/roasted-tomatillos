@@ -36,3 +36,20 @@ export const postRating = async (rating, user_id) => {
   const result = await response.json();
   return result;
 }
+
+export const postSignIn = async (user) => {
+  const url = 'https://rancid-tomatillos.herokuapp.com/api/v1/login';
+  let options = {
+    method: 'POST',
+    body: JSON.stringify(user),
+    headers: {
+     'Content-Type': 'application/json'
+    }
+  };
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error('There was a problem signing in')
+  }
+  const newUser = await response.json();
+  return newUser;
+}
