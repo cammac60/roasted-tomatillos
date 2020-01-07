@@ -1,9 +1,12 @@
 import React from 'react';
 import { Login, mapDispatchToProps } from './Login.js';
 import { shallow } from 'enzyme';
+import { postSignIn } from '../../apiCalls/apiCalls';
+
+jest.mock('../../apiCalls/apiCalls');
 
 describe('Login', () => {
-  let container, instance, mockEvent;
+  let container, instance, mockEvent, mockUser;
 
   beforeEach(() => {
     container = shallow(<Login addUser={jest.fn()} history={{push: jest.fn()}}/>);
@@ -15,6 +18,7 @@ describe('Login', () => {
       },
       preventDefault: jest.fn()
     }
+    mockUser = {email: 'email', name: 'name'};
   });
 
   it('Should match the snapshot', () => {
@@ -122,6 +126,43 @@ describe('Login', () => {
       expect(instance.fetchUser).toHaveBeenCalledWith({
         email: 'test email',
         password: 'test password'
+      });
+    });
+
+  });
+
+  describe('fetchUser', () => {
+
+    it('Should call the postSignIn function with the correct argument', () => {
+      instance.fetchUser(mockUser);
+      postSignIn.mockImplementation(() => {
+        return Promise.resolve(mockUser)
+      });
+      expect(postSignIn).toHaveBeenCalledWith(mockUser);
+    });
+
+    it('Should reset the state if the promise resolves', () => {
+      postSignIn.mockImplementation(() => {
+        return Promise.resolve(mockUser)
+      });
+      instance.fetchUser(mockUser);
+      expect(instance.state).toEqual({
+        email: '',
+        password: '',
+        errorMsg: ''
+      });
+    });
+
+    it('Should add and error message to state if the promise rejects', async () => {
+      const mockError = {error: 'error'};
+      postSignIn.mockImplementation(() => {
+        return Promise.reject(Error('fetch failed'))
+      });
+      await instance.fetchUser(mockUser);
+      expect(instance.state).toEqual({
+        email: '',
+        password: '',
+        errorMsg: 'Your email or password was incorrect'
       });
     });
 
