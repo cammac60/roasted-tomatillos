@@ -6,13 +6,14 @@ describe('Login', () => {
   let container, instance, mockEvent;
 
   beforeEach(() => {
-    container = shallow(<Login />);
+    container = shallow(<Login addUser={jest.fn()}/>);
     instance = container.instance();
     mockEvent = {
       target: {
         id: 'email',
-        value: 'new value'
-      }
+        value: 'new value',
+      },
+      preventDefault: jest.fn()
     }
   });
 
@@ -82,6 +83,33 @@ describe('Login', () => {
       }
       instance.handleChange(mockEvent);
       expect(instance.state.password).toEqual('new value');
+    });
+
+  });
+
+  describe('handleSubmit', () => {
+
+    it('Should update the error message in state if the form isn\'t validated', () => {
+      instance.handleSubmit(mockEvent);
+      expect(instance.state).toEqual({
+        email: '',
+        password: '',
+        errorMsg: 'Please enter an email and a password'
+      });
+    });
+
+    it('Should clear the state if the form is validated',  () => {
+      instance.state = {
+        email: 'test email',
+        password: 'test password',
+        errorMsg: ''
+      };
+      instance.handleSubmit(mockEvent);
+      expect(instance.state).toEqual({
+        email: '',
+        password: '',
+        errorMsg: ''
+      });
     });
 
   });
