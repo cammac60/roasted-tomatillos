@@ -58,6 +58,10 @@ describe("RatingBox", () => {
       instance.toggleClicked();
 
       expect(box.state('isClicked')).toEqual(true);
+
+      instance.toggleClicked();
+
+      expect(box.state('isClicked')).toEqual(false);
     });
 
     describe("chooseRating", () => {
@@ -81,13 +85,18 @@ describe("RatingBox", () => {
       });
 
       it("should call postRating when chooseRating is called", async () => {
+        const mockObject = {
+          movie_id: 2,
+          rating: 1
+        }
+
         await instance.chooseRating({
           target: {
             getAttribute: () => 'number1'
           }
         });
 
-        expect(postRating).toHaveBeenCalled();
+        expect(postRating).toHaveBeenCalledWith(mockObject, 1);
       });
 
       it("should call addRating prop when chooseRating is called", async () => {
@@ -100,13 +109,18 @@ describe("RatingBox", () => {
             addRating={addRating}/>
         )
 
+        const mockObject = {
+          movie_id: 2,
+          rating: 1
+        }
+
         await box.instance().chooseRating({
           target: {
             getAttribute: () => 'number1'
           }
         });
 
-        expect(addRating).toHaveBeenCalled();
+        expect(addRating).toHaveBeenCalledWith(mockObject);
       });
     });
   });

@@ -55,7 +55,7 @@ describe("RatingsPage", () => {
     it("should call createCards after rendering", () => {
       const spy = jest.spyOn(instance, 'createCards').mockImplementation(() => {});
       instance.forceUpdate();
-      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(mockMoviesData, mockRatingsData);
     });
   });
 

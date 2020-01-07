@@ -150,13 +150,13 @@ describe("App", () => {
         expect(spy).toHaveBeenCalled();
       });
 
-      it("should call getRatings", async () => {
+      it("should call getRatings with user id as argument", async () => {
         await instance.fetchRatingsData()
 
         expect(getRatings).toHaveBeenCalledWith(1);
       });
 
-      it("should call addRatings prop with movies as argument if fetch is completed correctly", async () => {
+      it("should call addRatings prop with ratings as argument if fetch is completed correctly", async () => {
 
         await instance.fetchRatingsData()
 
