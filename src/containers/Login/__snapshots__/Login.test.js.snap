@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login component Should match the snapshot 1`] = `
+<form
+  className="login-form"
+>
+  <h3>
+    Please sign in to continue
+  </h3>
+  <div
+    className="input-wrapper"
+  >
+    <div
+      className="error"
+    />
+    <label>
+      Email:
+    </label>
+    <input
+      autoComplete="off"
+      id="email"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <label>
+      Password:
+    </label>
+    <input
+      id="password"
+      onChange={[Function]}
+      type="password"
+      value=""
+    />
+    <button
+      className="sign-in"
+      onClick={[Function]}
+    >
+      Sign in
+    </button>
+    <Link
+      id="back-home"
+      to="/"
+    >
+      Go back
+    </Link>
+  </div>
+</form>
+`;

@@ -1,3 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header Should match the snapshot 1`] = `undefined`;
+exports[`Header Should match the snapshot if login is false 1`] = `
+<header
+  className="header"
+>
+  <h1>
+    Rancid Tomatillos
+  </h1>
+  <Link
+    id="login-link"
+    to="/login"
+  >
+    <button
+      className="toggleLogin"
+      id="login"
+    >
+      Login
+    </button>
+  </Link>
+</header>
+`;
+
+exports[`Header Should match the snapshot if login is true 1`] = `
+<header
+  className="header"
+>
+  <h1>
+    Rancid Tomatillos
+  </h1>
+  <Link
+    id="login-link"
+    to="/login"
+  >
+    <button
+      className="toggleLogin"
+      id="login"
+    >
+      Login
+    </button>
+  </Link>
+</header>
+`;
