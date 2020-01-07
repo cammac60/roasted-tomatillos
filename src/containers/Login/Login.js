@@ -65,7 +65,6 @@ export class Login extends Component {
       });
     }
     catch (error) {
-      console.error(error.message);
       this.setState({errorMsg: 'Your email or password was incorrect'});
     }
   }
