@@ -108,7 +108,19 @@ describe('actions', () => {
 
     // Execution
     const result = actions.removeUser();
+        // Expectation
+    expect(result).toEqual(expectedAction);
+  });
+  
+  it('should have a type of ADD_SELECTED_MOVIE for addSelectedMovie action', () => {
+    // Setup
+    const expectedAction = {
+      id: 1,
+      type: 'ADD_SELECTED_MOVIE'
+    };
 
+    // Execution
+    const result = actions.addSelectedMovie(1);
     // Expectation
     expect(result).toEqual(expectedAction);
   });
