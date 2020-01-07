@@ -9,7 +9,7 @@ import RatingsPage from '../RatingsPage/RatingsPage';
 import MovieInfoComponent from '../MovieInfoComponent/MovieInfoComponent';
 import { Route } from 'react-router-dom';
 import { getMovies, getRatings } from '../../apiCalls/apiCalls';
-import { addMovies, addLoaded, hasError, addRatings } from '../../actions';
+import { addMovies, addLoaded, hasError, addRatings, addSelectedMovie } from '../../actions';
 import Login from '../../containers/Login/Login';
 
 export class App extends Component {
@@ -66,12 +66,15 @@ export class App extends Component {
           )
         }}/>
         <Route path="/login" render={() => <Login />}/>
-        <Route path="/movies/:id" render={( { match } ) =>
-          <>
-            <Header />
-            <MovieInfoComponent id={match.params.id} />
-          </>
-        }/>
+        <Route path="/movies/:id" render={( { match } ) => {
+          this.props.addSelectedMovie(1);
+          return (
+            <>
+              <Header />
+              <MovieInfoComponent />
+            </>
+          )
+        }}/>
       </div>
     );
   }
@@ -87,7 +90,8 @@ export const mapDispatchToProps = dispatch => (
     addMovies,
     addLoaded,
     hasError,
-    addRatings
+    addRatings,
+    addSelectedMovie
   }, dispatch)
 )
 

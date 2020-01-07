@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { App, mapStateToProps, mapDispatchToProps } from './App';
 import { getMovies, getRatings } from '../../apiCalls/apiCalls';
-import { addMovies, addLoaded, hasError, addRatings } from '../../actions';
+import { addMovies, addLoaded, hasError, addRatings, addSelectedMovie } from '../../actions';
 
 jest.mock('../../apiCalls/apiCalls');
 
@@ -237,6 +237,15 @@ describe("App", () => {
       const actionToDispatch = addRatings(mockRatingsData);
       // Execution
       mappedProps.addRatings(mockRatingsData);
+      // Expectaion
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+
+    it('calls dispatch with an addSelectedMovie action when addSelectedMovie is called', () => {
+      // Setup
+      const actionToDispatch = addSelectedMovie(1);
+      // Execution
+      mappedProps.addSelectedMovie(1);
       // Expectaion
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });

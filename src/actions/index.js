@@ -32,3 +32,8 @@ export const removeUser = () => ({
   type: 'REMOVE_USER',
   user: {}
 });
+
+export const addSelectedMovie = id => ({
+  type: 'ADD_SELECTED_MOVIE',
+  id
+})
