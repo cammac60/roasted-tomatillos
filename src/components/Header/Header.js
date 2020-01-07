@@ -7,7 +7,7 @@ import { removeUser } from '../../actions';
 
 export const Header = ({ user, removeUser }) => {
   let toggleLogin;
-  user.id ?
+  user ?
   toggleLogin = <button id="logout" className="toggleLogin" onClick={removeUser}>Logout</button> : toggleLogin = <Link id="login-link" to="/login">
     <button id="login" className="toggleLogin">
       Login

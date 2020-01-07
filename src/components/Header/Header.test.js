@@ -1,25 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
-import { Header, mapStateToProps } from './Header';
+import { Header, mapStateToProps, mapDispatchToProps } from './Header';
 
 describe('Header', () => {
-  let wrapper, state;
+  let wrapper, instance;
 
   beforeEach(() => {
     wrapper = shallow(<Header login={false}/>);
-    state = {
-      login: false
-    }
+    instance = wrapper.instance();
   });
 
-  it('Should match the snapshot', () =>{
+  it('Should match the snapshot if login is false', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('Should redirect when the button is clicked', () => {
-    wrapper.find('.toggleLogin').simulate('click');
-    expect(wrapper.instance().Redirect).toHaveBeenCalled();
+  it('Should match the snapshot if login is true', () => {
+    wrapper = shallow(<Header login={true}/>);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it.skip('Should call the remove user method when the logout button is clicked', () => {
+    wrapper = shallow(<Header user={true}/>);
+    const mockDispatch = jest.fn();
+    wrapper.find('#logout').simulate('click');
+    expect(mockDispatch).toHaveBeenCalled();
   });
 
 });
