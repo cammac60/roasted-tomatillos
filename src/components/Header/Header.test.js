@@ -20,11 +20,22 @@ describe('Header', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it.skip('Should call the remove user method when the logout button is clicked', () => {
-    wrapper = shallow(<Header user={true}/>);
-    const mockDispatch = jest.fn();
+  it('Should return a user object', () => {
+    const mockState = {
+      user: {email: 'email', id: 'id'}
+    };
+    const expected = {
+      user: {email: 'email', id: 'id'}
+    };
+    const mappedProps = mapStateToProps(mockState);
+    expect(mappedProps).toEqual(expected);
+  });
+
+  it('Should call the remove user method when the logout button is clicked', () => {
+    const removeUser = jest.fn();
+    wrapper = shallow(<Header user={true} removeUser={removeUser}/>);
     wrapper.find('#logout').simulate('click');
-    expect(mockDispatch).toHaveBeenCalled();
+    expect(removeUser).toHaveBeenCalled();
   });
 
 });
