@@ -18,6 +18,11 @@ export const addRatings = ratings => ({
   ratings
 });
 
+export const addRating = rating => ({
+  type: 'ADD_RATING',
+  rating
+});
+
 export const addUser = user => ({
   type: 'ADD_USER',
   user
