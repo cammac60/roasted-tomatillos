@@ -84,6 +84,34 @@ describe('actions', () => {
     expect(result).toEqual(expectedAction);
   });
 
+  it('should have a type of ADD_USER for addUser action', () => {
+    // Setup
+    const mockUser = {id: 1, email: 'email@mail.com', password: 'password'};
+    const expectedAction = {
+      user: mockUser,
+      type: 'ADD_USER'
+    };
+
+    // Execution
+    const result = actions.addUser(mockUser);
+
+    // Expectation
+    expect(result).toEqual(expectedAction);
+  });
+
+  it('should have a type of REMOVE_USER for removeUser action', () => {
+    // Setup
+    const expectedAction = {
+      user: null,
+      type: 'REMOVE_USER'
+    };
+
+    // Execution
+    const result = actions.removeUser();
+        // Expectation
+    expect(result).toEqual(expectedAction);
+  });
+  
   it('should have a type of ADD_SELECTED_MOVIE for addSelectedMovie action', () => {
     // Setup
     const expectedAction = {

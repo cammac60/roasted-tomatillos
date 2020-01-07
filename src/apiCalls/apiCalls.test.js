@@ -1,4 +1,4 @@
-import { getMovies, getRatings, postRating } from './apiCalls'
+import { getMovies, getRatings, postRating, postSignIn } from './apiCalls'
 
 describe('getMovies', () => {
   let mockMoviesData =
@@ -82,7 +82,7 @@ describe("postRating", () => {
       })
     })
   })
-  
+
   it("should call fetch with correct url and options", () => {
     postRating(mockRating, 2)
 
@@ -99,7 +99,7 @@ describe("postRating", () => {
         ok: false
       })
     })
-    
+
     expect(postRating(mockRating, 2)).rejects.toEqual(Error('There was an error posting rating.'))
   })
 
@@ -110,7 +110,7 @@ describe("postRating", () => {
     expect(postRating(mockRating, 2)).rejects.toEqual(Error('Fetch is failed'))
   })
 })
-        
+
 describe('getRatings', () => {
   let mockRatingsData =
     [{
@@ -158,5 +158,59 @@ describe('getRatings', () => {
 
     expect(getRatings()).rejects
       .toEqual(Error('Failed to fetch'))
+  })
+})
+
+describe("postSignIn", () => {
+  let mockOptions
+  const mockUser = {
+    id: 1,
+    name: 'Sam',
+    email: 'sam@turing.com',
+    password: '1234'
+  }
+
+  beforeEach(() => {
+    mockOptions = {
+      method: 'POST',
+      body: JSON.stringify(mockUser),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(mockUser)
+      })
+    })
+  })
+
+  it("should call fetch with correct url and options", () => {
+    postSignIn(mockUser)
+
+    expect(window.fetch).toHaveBeenCalledWith('https://rancid-tomatillos.herokuapp.com/api/v1/login', mockOptions)
+  })
+
+  it("should return array if fetch is completed correctly", () => {
+    expect(postSignIn(mockUser)).resolves.toEqual(mockUser)
+  })
+
+  it("should return error if fetch is completed incorrectly", () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: false
+      })
+    })
+
+    expect(postSignIn(mockUser)).rejects.toEqual(Error('There was a problem signing in'))
+  })
+
+  it("should return error if fetch is failed", () => {
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.reject(Error('Fetch is failed'))
+    })
+    expect(postSignIn(mockUser)).rejects.toEqual(Error('Fetch is failed'))
   })
 })
