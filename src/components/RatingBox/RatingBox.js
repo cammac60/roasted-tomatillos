@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './RatingBox.scss';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import cancelIcon from '../../assets/images/cancel.svg';
 import { postRating } from '../../apiCalls/apiCalls'
+import { addRating } from '../../actions'
 
 export class RatingBox extends Component {
   constructor(props) {
@@ -16,25 +19,26 @@ export class RatingBox extends Component {
   }
 
   chooseRating = async (event) => {
-    const rating = event.target.getAttribute('id').replace('number', '');
+    const {movie_id, addRating} = this.props
+    const rating = parseInt(event.target.getAttribute('id').replace('number', ''));
     const ratingFull = {
-      id: Date.now(),
-      ...this.props,
+      movie_id,
       rating
     }
-
     await postRating(ratingFull, this.props.user_id);
-    this.toggleClicked();
+    addRating(ratingFull);
   }
 
   render() {
-    const numbers = new Array(10).fill(undefined).map((el, i) => (
-      <p
-        key={`number${i+1}`}
-        className="rate-number"
-        onClick={this.chooseRating}
-        id={`number${i+1}`}>{i+1}</p>
-    ));
+    const numbers = new Array(10)
+      .fill(undefined)
+      .map((el, i) => (
+        <p
+          key={`number${i+1}`}
+          className="rate-number"
+          onClick={this.chooseRating}
+          id={`number${i+1}`}>{i+1}</p>
+      ));
 
     return (
       (!this.state.isClicked)
@@ -52,4 +56,10 @@ export class RatingBox extends Component {
   }
 }
 
-export default RatingBox;
+export const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    addRating
+  }, dispatch)
+)
+
+export default connect(null, mapDispatchToProps)(RatingBox);

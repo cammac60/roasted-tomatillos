@@ -10,7 +10,15 @@ exports[`App App component should match snapshot 1`] = `
     render={[Function]}
   />
   <Route
+    path="/ratings"
+    render={[Function]}
+  />
+  <Route
     path="/login"
+    render={[Function]}
+  />
+  <Route
+    path="/movies/:id"
     render={[Function]}
   />
 </div>

@@ -68,4 +68,19 @@ describe('actions', () => {
     // Expectation
     expect(result).toEqual(expectedAction);
   });
+
+  it('should have a type of ADD_RATING for addRating action', () => {
+    // Setup
+    const mockRating = {id: 1, movie_id: 1, rating: 6};
+    const expectedAction = {
+      rating: mockRating,
+      type: 'ADD_RATING'
+    };
+
+    // Execution
+    const result = actions.addRating(mockRating);
+
+    // Expectation
+    expect(result).toEqual(expectedAction);
+  });
 });

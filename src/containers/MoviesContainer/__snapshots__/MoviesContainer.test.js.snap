@@ -16,7 +16,7 @@ exports[`MoviesContainer MoviesContainer component should match snapshot if data
     id={1}
     img="https://some.url/poster-image"
     key="1"
-    rate={4}
+    rate="4.0"
     title="Jumanji: The Next Level"
   />
 </main>

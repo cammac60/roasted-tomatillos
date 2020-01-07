@@ -37,7 +37,6 @@ describe("App", () => {
     const mockProps = {
       isLoaded: true,
       user: {},
-      login: false,
       addMovies: addMovies,
       addLoaded: addLoaded,
       hasError: hasError,
@@ -151,13 +150,13 @@ describe("App", () => {
         expect(spy).toHaveBeenCalled();
       });
 
-      it("should call getRatings", async () => {
+      it("should call getRatings with user id as argument", async () => {
         await instance.fetchRatingsData()
 
         expect(getRatings).toHaveBeenCalledWith(1);
       });
 
-      it("should call addRatings prop with movies as argument if fetch is completed correctly", async () => {
+      it("should call addRatings prop with ratings as argument if fetch is completed correctly", async () => {
 
         await instance.fetchRatingsData()
 
@@ -182,14 +181,12 @@ describe("App", () => {
       const mockState = {
         isLoaded: true,
         user_id: 1,
-        login: true,
         user: {id: 1}
       };
 
       const expected = {
         isLoaded: true,
-        user: {id: 1},
-        login: true
+        user: {id: 1}
       };
 
       // Execution

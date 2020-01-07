@@ -1,20 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RatingsPage RatingsPage component should match snapshop if redirect is true 1`] = `
-<Redirect
-  to="/"
-/>
-`;
-
 exports[`RatingsPage RatingsPage component should match snapshop if there is no user logged 1`] = `
 <div
   className="ratings"
 >
-  <button
-    onClick={[Function]}
+  <NavLink
+    to="/"
   >
     ← back to all movies
-  </button>
+  </NavLink>
   <h2
     className="error"
   >
@@ -27,11 +21,11 @@ exports[`RatingsPage RatingsPage component should match snapshop if there is use
 <div
   className="ratings"
 >
-  <button
-    onClick={[Function]}
+  <NavLink
+    to="/"
   >
     ← back to all movies
-  </button>
+  </NavLink>
   <h2
     className="error"
   >
@@ -44,11 +38,11 @@ exports[`RatingsPage RatingsPage component should match snapshop with all data p
 <div
   className="ratings"
 >
-  <button
-    onClick={[Function]}
+  <NavLink
+    to="/"
   >
     ← back to all movies
-  </button>
+  </NavLink>
   <SmallMovieCard
     deleteButton={true}
     id={1}

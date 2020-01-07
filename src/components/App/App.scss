@@ -8,6 +8,19 @@
   margin: 0;
   width: 100vw; height: 100vh;
   overflow: hidden;
+  a {
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+    margin: 0 10px;
+    padding-bottom: 5px;
+    margin-left: 40px;
+    margin-top: 20px;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 }
 
 h2 {
