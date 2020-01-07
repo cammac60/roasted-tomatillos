@@ -27,7 +27,7 @@ describe("RatingsPage", () => {
   const mockProps = {
     movies: mockMoviesData,
     ratings: mockRatingsData,
-    login: true
+    user: true
   }
 
   describe("RatingsPage component", () => {
@@ -48,36 +48,14 @@ describe("RatingsPage", () => {
     });
 
     it("should match snapshop if there is no user logged", () => {
-      const pageNoUser = shallow(<RatingsPage {...mockProps} login={false} />)
+      const pageNoUser = shallow(<RatingsPage {...mockProps} user={false} />)
       expect(pageNoUser).toMatchSnapshot();
-    });
-
-    it("should match snapshop if redirect is true", () => {
-      page.setState({isRedirected: true})
-      expect(page).toMatchSnapshot();
     });
 
     it("should call createCards after rendering", () => {
       const spy = jest.spyOn(instance, 'createCards').mockImplementation(() => {});
       instance.forceUpdate();
       expect(spy).toHaveBeenCalled();
-    });
-
-    it("should call redirect after back button was clicked", () => {
-      const spy = jest.spyOn(instance, 'redirect').mockImplementation(() => {});
-      instance.forceUpdate();
-
-      page.find('button').simulate('click');
-
-      expect(spy).toHaveBeenCalled();
-    });
-
-    it("should change isRedirect state to true when redirect is called", () => {
-      expect(page.state('isRedirected')).toEqual(false);
-
-      instance.redirect();
-
-      expect(page.state('isRedirected')).toEqual(true);
     });
   });
 
