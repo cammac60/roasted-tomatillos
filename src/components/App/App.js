@@ -50,7 +50,7 @@ export class App extends Component {
           return (
             <>
               <Header />
-              {this.props.user && <NavLink to="/ratings">See yours ratings</NavLink>}
+              {this.props.user && <NavLink to="/ratings">&#9733; See your ratings</NavLink>}
               <MoviesContainer />
             </>
           )

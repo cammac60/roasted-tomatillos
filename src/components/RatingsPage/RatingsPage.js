@@ -11,7 +11,7 @@ export class RatingsPage extends Component {
       return (
         <SmallMovieCard
           key={rating.id}
-          id={rating.id}
+          id={movie.id}
           img={movie.poster_path}
           rate={rating.rating}
           title={movie.title}
