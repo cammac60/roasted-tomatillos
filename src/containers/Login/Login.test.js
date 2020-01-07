@@ -166,6 +166,22 @@ describe('Login', () => {
       });
     });
 
+    it.skip('Should invoke the addUser function if the promise resolves', () => {
+      postSignIn.mockImplementation(() => {
+        return Promise.resolve(mockUser)
+      });
+      instance.fetchUser(mockUser);
+      expect(instance.props.addUser).toHaveBeenCalled();
+    });
+
+    it.skip('Should invoke the history.push function if the promise resolves', () => {
+      postSignIn.mockImplementation(() => {
+        return Promise.resolve(mockUser)
+      });
+      instance.fetchUser(mockUser);
+      expect(instance.props.history.push).toHaveBeenCalledWith('/ratings');
+    });
+
   });
 
 });
