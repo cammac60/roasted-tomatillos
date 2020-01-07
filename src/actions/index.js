@@ -30,5 +30,5 @@ export const addUser = user => ({
 
 export const removeUser = () => ({
   type: 'REMOVE_USER',
-  user: {}
+  user: null
 });
