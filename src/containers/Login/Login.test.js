@@ -154,7 +154,6 @@ describe('Login', () => {
     });
 
     it('Should add and error message to state if the promise rejects', async () => {
-      const mockError = {error: 'error'};
       postSignIn.mockImplementation(() => {
         return Promise.reject(Error('fetch failed'))
       });
