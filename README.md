@@ -34,8 +34,8 @@ Group project (Mod3)
 
 **Loading animation**
 
-![Loading animation](./screenshots/loading-page.png)
+![Loading animation](./screenshots/loading-page.gif)
 
 **Add rating animation**
 
-![Add rating animation](./screenshots/add-rating-action.png)
+![Add rating animation](./screenshots/add-rating-action.gif)
