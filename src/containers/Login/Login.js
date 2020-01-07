@@ -43,26 +43,30 @@ export class Login extends Component {
     }
   }
 
-  handleSubmit = async (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
     if (this.validateForm()) {
       let user = {
         email: this.state.email,
         password: this.state.password
       };
-      try {
-        const result = await postSignIn(user)
-        this.props.addUser(result.user)
-      }
-      catch (error) {
-        console.error(error.message)
-        this.setState({errorMsg: 'Your email or password was incorrect'});
-      }
+      this.fetchUser(user);
+    }
+  }
+
+  fetchUser = async (user) => {
+    try {
+      const result = await postSignIn(user);
+      this.props.addUser(result.user);
+      this.props.history.push('/ratings');
       this.setState({
         email: '',
         password: ''
       });
-      this.props.history.push('/ratings');
+    }
+    catch (error) {
+      console.error(error.message);
+      this.setState({errorMsg: 'Your email or password was incorrect'});
     }
   }
 

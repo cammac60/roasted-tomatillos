@@ -6,7 +6,7 @@ describe('Login', () => {
   let container, instance, mockEvent;
 
   beforeEach(() => {
-    container = shallow(<Login addUser={jest.fn()}/>);
+    container = shallow(<Login addUser={jest.fn()} history={{push: jest.fn()}}/>);
     instance = container.instance();
     mockEvent = {
       target: {
@@ -111,17 +111,17 @@ describe('Login', () => {
       });
     });
 
-    it.skip('Should clear the state if the form is validated',  () => {
+    it('Should call the fetchUser function',  () => {
       instance.state = {
         email: 'test email',
         password: 'test password',
         errorMsg: ''
       };
+      instance.fetchUser = jest.fn();
       instance.handleSubmit(mockEvent);
-      expect(instance.state).toEqual({
-        email: '',
-        password: '',
-        errorMsg: ''
+      expect(instance.fetchUser).toHaveBeenCalledWith({
+        email: 'test email',
+        password: 'test password'
       });
     });
 
