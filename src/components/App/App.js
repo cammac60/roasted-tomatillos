@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import './App.scss';
 import MoviesContainer from '../../containers/MoviesContainer/MoviesContainer';
 import Header from '../Header/Header.js';
@@ -14,9 +14,8 @@ import Login from '../../containers/Login/Login';
 
 export class App extends Component {
   componentDidMount() {
-    const {isLoaded, login} = this.props;
-    if (!isLoaded) this.fetchMoviesData()
-    if (login) this.fetchRatingsData()
+    if (!this.props.isLoaded) this.fetchMoviesData()
+    if (this.props.user) this.fetchRatingsData()
   }
 
   fetchMoviesData = async () => {
@@ -46,18 +45,26 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route exact path='/' render={() =>
-          <>
-            <Header />
-            <MoviesContainer />
-          </>
+        <Route exact path='/' render={() => {
+          if (this.props.user) this.fetchRatingsData()
+          return (
+            <>
+              <Header />
+              {this.props.user && <NavLink to="/ratings">See yours ratings</NavLink>}
+              <MoviesContainer />
+            </>
+          )
+        }
         }/>
-        <Route path="/ratings" render={() => (
-          <>
-            <Header />
-            <RatingsPage />
-          </>
-        )}/>
+        <Route path="/ratings" render={() => {
+          if (this.props.user) this.fetchRatingsData()
+          return (
+            <>
+              <Header />
+              <RatingsPage />
+            </>
+          )
+        }}/>
         <Route path="/login" render={() => <Login />}/>
         <Route path="/movies/:id" render={( { match } ) =>
           <>
@@ -70,10 +77,9 @@ export class App extends Component {
   }
 }
 
-export const mapStateToProps = ({isLoaded, user, login}) => ({
+export const mapStateToProps = ({isLoaded, user}) => ({
   user,
-  isLoaded,
-  login
+  isLoaded
 })
 
 export const mapDispatchToProps = dispatch => (

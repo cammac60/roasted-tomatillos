@@ -37,7 +37,6 @@ describe("App", () => {
     const mockProps = {
       isLoaded: true,
       user: {},
-      login: false,
       addMovies: addMovies,
       addLoaded: addLoaded,
       hasError: hasError,
@@ -182,14 +181,12 @@ describe("App", () => {
       const mockState = {
         isLoaded: true,
         user_id: 1,
-        login: true,
         user: {id: 1}
       };
 
       const expected = {
         isLoaded: true,
-        user: {id: 1},
-        login: true
+        user: {id: 1}
       };
 
       // Execution
