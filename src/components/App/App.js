@@ -67,7 +67,7 @@ export class App extends Component {
         }}/>
         <Route path="/login" render={() => <Login />}/>
         <Route path="/movies/:id" render={( { match } ) => {
-          this.props.addSelectedMovie(1);
+          this.props.addSelectedMovie(match.params.id);
           return (
             <>
               <Header />
