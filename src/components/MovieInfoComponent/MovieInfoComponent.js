@@ -4,7 +4,7 @@ import './MovieInfoComponent.scss'
 import { Redirect } from 'react-router-dom';
 import RatingBox from '../RatingBox/RatingBox'
 
-class MovieInfoComponent extends Component {
+export class MovieInfoComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -48,19 +48,10 @@ class MovieInfoComponent extends Component {
   }
 }
 
-export const mapStateToProps = ({movies, ratings, user}, props) => ({
-  movie: movies.find(movie => movie.id === parseInt(props.id)),
-  rating: ratings.find(rating => rating.movie_id === parseInt(props.id)),
+export const mapStateToProps = ({movies, ratings, user, selectedMovie}) => ({
+  movie: movies.find(movie => movie.id === parseInt(selectedMovie)),
+  rating: ratings.find(rating => rating.movie_id === parseInt(selectedMovie)),
   user
 });
 
 export default connect(mapStateToProps)(MovieInfoComponent);
-
-
-// id: 3
-// title: "Frozen II"
-// poster_path: "https://image.tmdb.org/t/p/original//pjeMs3yqRmFL3giJy4PMXWZTTPa.jpg"
-// backdrop_path: "https://image.tmdb.org/t/p/original//xJWPZIYOEFIjZpBL7SVBGnzRYXp.jpg"
-// release_date: "2019-11-20"
-// overview: "Elsa, Anna, Kristoff and Olaf head far into the forest to learn the truth about an ancient mystery of their kingdom."
-// average_rating: 8

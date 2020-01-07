@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieInfoComponent MovieInfoComponent component should match snapshot if redirected state is true 1`] = `
+<Redirect
+  to="/"
+/>
+`;
+
+exports[`MovieInfoComponent MovieInfoComponent component should match snapshot if there is no user 1`] = `
+<main
+  className="single-movie-info"
+>
+  <button
+    onClick={[Function]}
+  >
+    ← back to all movies
+  </button>
+  <div
+    className="title-div"
+  >
+    <h2>
+      Jumanji: The Next Level (2019)
+    </h2>
+  </div>
+  <div
+    className="img-container"
+    style={
+      Object {
+        "backgroundImage": "url(https://some.url/poster-image)",
+        "backgroundPosition": "center",
+        "backgroundSize": "100%",
+        "height": "300px",
+        "width": "230px",
+      }
+    }
+  />
+  <section
+    className="overview-box"
+  >
+    <h3>
+      Avr.Rating: 
+      4.0
+    </h3>
+    <p>
+      In Jumanji: The Next Level, the gang is back but the game has changed.
+    </p>
+    <footer />
+  </section>
+</main>
+`;
+
+exports[`MovieInfoComponent MovieInfoComponent component should match snapshot if there is user but no rating 1`] = `
+<main
+  className="single-movie-info"
+>
+  <button
+    onClick={[Function]}
+  >
+    ← back to all movies
+  </button>
+  <div
+    className="title-div"
+  >
+    <h2>
+      Jumanji: The Next Level (2019)
+    </h2>
+  </div>
+  <div
+    className="img-container"
+    style={
+      Object {
+        "backgroundImage": "url(https://some.url/poster-image)",
+        "backgroundPosition": "center",
+        "backgroundSize": "100%",
+        "height": "300px",
+        "width": "230px",
+      }
+    }
+  />
+  <section
+    className="overview-box"
+  >
+    <h3>
+      Avr.Rating: 
+      4.0
+    </h3>
+    <p>
+      In Jumanji: The Next Level, the gang is back but the game has changed.
+    </p>
+    <footer>
+      <Connect(RatingBox)
+        movie_id={1}
+      />
+    </footer>
+  </section>
+</main>
+`;
+
+exports[`MovieInfoComponent MovieInfoComponent component should match snapshot with all data passed in correctly 1`] = `
+<main
+  className="single-movie-info"
+>
+  <button
+    onClick={[Function]}
+  >
+    ← back to all movies
+  </button>
+  <div
+    className="title-div"
+  >
+    <h2>
+      Jumanji: The Next Level (2019)
+    </h2>
+  </div>
+  <div
+    className="img-container"
+    style={
+      Object {
+        "backgroundImage": "url(https://some.url/poster-image)",
+        "backgroundPosition": "center",
+        "backgroundSize": "100%",
+        "height": "300px",
+        "width": "230px",
+      }
+    }
+  />
+  <section
+    className="overview-box"
+  >
+    <h3>
+      Avr.Rating: 
+      4.0
+    </h3>
+    <h3>
+      Your rating: 7
+    </h3>
+    <p>
+      In Jumanji: The Next Level, the gang is back but the game has changed.
+    </p>
+    <footer />
+  </section>
+</main>
+`;
