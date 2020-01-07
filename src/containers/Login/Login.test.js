@@ -3,11 +3,17 @@ import { Login, mapDispatchToProps } from './Login.js';
 import { shallow } from 'enzyme';
 
 describe('Login', () => {
-  let container, instance;
+  let container, instance, mockEvent;
 
   beforeEach(() => {
     container = shallow(<Login />);
     instance = container.instance();
+    mockEvent = {
+      target: {
+        id: 'email',
+        value: 'new value'
+      }
+    }
   });
 
   it('Should match the snapshot', () => {
@@ -46,6 +52,36 @@ describe('Login', () => {
         errorMsg: ''
       }
       expect(instance.validateForm()).toEqual(true);
+    });
+
+  });
+
+  describe('handleChange', () => {
+
+    it('Should remove the error message if the fields are filled in', () => {
+      instance.state = {
+        email: 'test email',
+        password: 'test password',
+        errorMsg: 'test error'
+      }
+      instance.handleChange(mockEvent);
+      expect(instance.state.errorMsg).toEqual('');
+    });
+
+    it('Should update the email in state if the target is the email input', () => {
+      instance.handleChange(mockEvent);
+      expect(instance.state.email).toEqual('new value');
+    });
+
+    it('Should update the password in state if the target is the password input', () => {
+      mockEvent = {
+        target: {
+          id: 'password',
+          value: 'new value'
+        }
+      }
+      instance.handleChange(mockEvent);
+      expect(instance.state.password).toEqual('new value');
     });
 
   });
