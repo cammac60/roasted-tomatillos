@@ -16,7 +16,7 @@ class MovieInfoComponent extends Component {
   }
 
   render() {
-    const { movie, rating, login, user} = this.props
+    const { movie, rating, user} = this.props
     const { id, title, release_date, poster_path, overview, average_rating} = movie;
     const year = release_date.split('-')[0];
 
@@ -37,10 +37,10 @@ class MovieInfoComponent extends Component {
           <div className='img-container' style={cardStyles}></div>
           <section className='overview-box'>
             <h3>Avr.Rating: {average_rating.toFixed(1)}</h3>
-            {login && rating && <h3>{`Your rating: ${rating.rating}`}</h3>}
+            {user && rating && <h3>{`Your rating: ${rating.rating}`}</h3>}
             <p>{overview}</p>
             <footer>
-              {login && !rating && <RatingBox movie_id={id} user_id={user.id} />}
+              {user && !rating && <RatingBox movie_id={id} user_id={user.id} />}
             </footer>
           </section>
         </main>
@@ -48,10 +48,9 @@ class MovieInfoComponent extends Component {
   }
 }
 
-export const mapStateToProps = ({movies, ratings, login, user}, props) => ({
+export const mapStateToProps = ({movies, ratings, user}, props) => ({
   movie: movies.find(movie => movie.id === parseInt(props.id)),
   rating: ratings.find(rating => rating.movie_id === parseInt(props.id)),
-  login,
   user
 });
 

@@ -29,4 +29,22 @@ describe('ratings', () => {
     // Expectation
     expect(result).toEqual(expected);
   });
+
+  it('should return the ratings array with new rating if action type is ADD_RATING', () => {
+    // Setup
+    const mockAllRatings = [{id: 1, movie_id: 1, rating: 6}];
+    const rating = {id: 2, movie_id: 4, rating: 8};
+    const mockAction = {
+      type: 'ADD_RATING',
+      rating
+    }
+
+    const expected = [...mockAllRatings, rating];
+
+    // Execution
+    const result = ratings(mockAllRatings, mockAction);
+
+    // Expectation
+    expect(result).toEqual(expected);
+  });
 });

@@ -54,7 +54,7 @@ describe("MoviesContainer", () => {
         .mockImplementation(() => {});
       instance.forceUpdate()
 
-      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(mockMoviesData);
     });
 
   });

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RatingBox should match snapshot with all data passed in correctly and isClicked state is false 1`] = `
+exports[`RatingBox RatingBox component should match snapshot with all data passed in correctly and isClicked state is false 1`] = `
 <button
   className="add-rating"
   onClick={[Function]}
@@ -9,7 +9,7 @@ exports[`RatingBox should match snapshot with all data passed in correctly and i
 </button>
 `;
 
-exports[`RatingBox should match snapshot with all data passed in correctly and isClicked state is true 1`] = `
+exports[`RatingBox RatingBox component should match snapshot with all data passed in correctly and isClicked state is true 1`] = `
 <section
   className="rating-box"
 >
