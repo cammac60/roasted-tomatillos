@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './MovieInfoComponent.scss'
 import { Redirect } from 'react-router-dom';
-import RatingBox from '../RatingBox/RatingBox'
+import RatingBox from '../RatingBox/RatingBox';
+import propTypes from 'prop-types';
 
 export class MovieInfoComponent extends Component {
   constructor(props) {
@@ -27,7 +28,6 @@ export class MovieInfoComponent extends Component {
       width: '230px',
       height: '300px'
     }
-
     return (
       (this.state.isRedirected)
         ? <Redirect to='/' />
@@ -53,5 +53,17 @@ export const mapStateToProps = ({movies, ratings, user, selectedMovie}) => ({
   rating: ratings.find(rating => rating.movie_id === parseInt(selectedMovie)),
   user
 });
+
+MovieInfoComponent.propTypes = {
+  movie: propTypes.object,
+  rating: propTypes.string,
+  user: propTypes.string,
+  id: propTypes.number,
+  title: propTypes.string,
+  release_date: propTypes.string, 
+  poster_path: propTypes.string, 
+  overview: propTypes.string, 
+  average_rating: propTypes.string
+}
 
 export default connect(mapStateToProps)(MovieInfoComponent);
