@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './SmallMovieCard.scss'
 import { Redirect } from 'react-router-dom';
 import deleteIcon from '../../assets/images/delete.svg';
+import propTypes from 'prop-types';
 
 class SmallMovieCard extends Component {
   constructor(props) {
@@ -40,6 +41,14 @@ class SmallMovieCard extends Component {
         </section>
     );
   }
+}
+
+SmallMovieCard.propTypes = {
+  id: propTypes.number, 
+  img: propTypes.string, 
+  title: propTypes.string, 
+  rate: propTypes.string, 
+  deleteButton: propTypes.func
 }
 
 export default SmallMovieCard;
